@@ -1,0 +1,20 @@
+# Render Blueprint — deploy automatico
+# Su render.com: New + -> Blueprint -> seleziona questo repo e il branch.
+# Render legge questo file e crea il web service con disco persistente.
+services:
+  - type: web
+    name: relativita-prenotazioni
+    runtime: node
+    plan: free
+    branch: claude/lesson-booking-webapp-S9QwU
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: DATA_DIR
+        value: /var/data
+    disk:
+      name: data
+      mountPath: /var/data
+      sizeGB: 1

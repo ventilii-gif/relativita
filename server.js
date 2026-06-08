@@ -5,12 +5,12 @@ const fs      = require('fs');
 const path    = require('path');
 
 const app  = express();
-const DATA = path.join(__dirname, 'data');
+const DATA = process.env.DATA_DIR || path.join(__dirname, 'data');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ── File I/O ──────────────────────────────────────────────────────
+// ── File I/O ─────────────────────────────────────────────
 if (!fs.existsSync(DATA)) fs.mkdirSync(DATA, { recursive: true });
 
 function read(file, def = null) {
@@ -21,7 +21,7 @@ function write(file, data) {
   fs.writeFileSync(path.join(DATA, `${file}.json`), JSON.stringify(data, null, 2));
 }
 
-// ── Config (auto-generated on first run) ─────────────────────────
+// ── Config (auto-generated on first run) ──────────────────────
 function getConfig() {
   let c = read('config');
   if (!c) {
@@ -31,7 +31,7 @@ function getConfig() {
   return c;
 }
 
-// ── Default template seed (Lun–Ven 15:00–19:00) ──────────────────
+// ── Default template seed (Lun–Ven 15:00–19:00) ─────────────────
 function seedTemplate() {
   if (read('template') !== null) return;
   const tpl = [];
@@ -41,12 +41,12 @@ function seedTemplate() {
   write('template', tpl);
 }
 
-// ── Password hash ─────────────────────────────────────────────────
+// ── Password hash ────────────────────────────────────
 function hashPw(pw) {
   return crypto.createHmac('sha256', 'rv-salt').update(pw).digest('hex');
 }
 
-// ── Token (HMAC-signed, 30 days) ──────────────────────────────────
+// ── Token (HMAC-signed, 30 days) ─────────────────────────
 function signToken(payload) {
   const { secret } = getConfig();
   const body = Buffer.from(JSON.stringify({
@@ -72,7 +72,7 @@ function verifyToken(token) {
   } catch { return null; }
 }
 
-// ── Auth helpers ──────────────────────────────────────────────────
+// ── Auth helpers ───────────────────────────────────
 function authOf(req) {
   const h = req.headers.authorization || '';
   return verifyToken(h.startsWith('Bearer ') ? h.slice(7) : '');
@@ -92,7 +92,7 @@ function requireAdmin(req, res, next) {
 
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
-// ── Slot logic ────────────────────────────────────────────────────
+// ── Slot logic ──────────────────────────────────────
 function computeSlots(weeksAhead = 4) {
   const template   = read('template', []);
   const exceptions = read('exceptions', []);
@@ -143,7 +143,7 @@ function computeRecurring(startDate, time, count) {
   return dates;
 }
 
-// ── Routes: Auth ──────────────────────────────────────────────────
+// ── Routes: Auth ───────────────────────────────────
 app.post('/api/register', (req, res) => {
   const { nome, cognome, telefono, pw } = req.body;
   if (!nome || !cognome || !telefono || !pw)
@@ -193,7 +193,7 @@ app.put('/api/admin/password', requireAdmin, (req, res) => {
   res.json({ ok: true });
 });
 
-// ── Routes: Slots ─────────────────────────────────────────────────
+// ── Routes: Slots ──────────────────────────────────
 app.get('/api/slots', requireStudent, (req, res) => {
   const weeks = Math.min(parseInt(req.query.weeks) || 4, 12);
   res.json(computeSlots(weeks));
@@ -205,7 +205,7 @@ app.get('/api/recurring', requireStudent, (req, res) => {
   res.json(computeRecurring(startDate, time, n));
 });
 
-// ── Routes: Template ──────────────────────────────────────────────
+// ── Routes: Template ────────────────────────────────
 app.get('/api/template', requireAdmin, (req, res) => res.json(read('template', [])));
 
 app.post('/api/template', requireAdmin, (req, res) => {
@@ -224,7 +224,7 @@ app.delete('/api/template', requireAdmin, (req, res) => {
   res.json(read('template', []));
 });
 
-// ── Routes: Exceptions ────────────────────────────────────────────
+// ── Routes: Exceptions ──────────────────────────────
 app.get('/api/exceptions', requireAdmin, (req, res) => res.json(read('exceptions', [])));
 
 app.post('/api/exceptions', requireAdmin, (req, res) => {
@@ -245,7 +245,7 @@ app.delete('/api/exceptions', requireAdmin, (req, res) => {
   res.json(read('exceptions', []));
 });
 
-// ── Routes: Bookings ──────────────────────────────────────────────
+// ── Routes: Bookings ───────────────────────────────
 app.get('/api/bookings', (req, res) => {
   const p = authOf(req);
   if (!p) return res.status(401).json({ error: 'Non autenticato' });
@@ -289,7 +289,7 @@ app.patch('/api/bookings/:id', (req, res) => {
   res.json(b);
 });
 
-// ── Routes: Students (admin) ──────────────────────────────────────
+// ── Routes: Students (admin) ──────────────────────────
 app.get('/api/students', requireAdmin, (req, res) => {
   const users = read('users', []).map(({ pwHash, ...u }) => u);
   const bs    = read('bookings', []);
@@ -299,7 +299,7 @@ app.get('/api/students', requireAdmin, (req, res) => {
   })));
 });
 
-// ── Start ─────────────────────────────────────────────────────────
+// ── Start ──────────────────────────────────────────
 seedTemplate();
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`▶  http://localhost:${PORT}`));
