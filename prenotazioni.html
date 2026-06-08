@@ -282,7 +282,7 @@ textarea{resize:vertical;min-height:72px}
   <div id="tab-slots" class="tab-pane" style="display:none">
     <div class="card" style="margin-top:.7rem">
       <div class="card-title">Template settimanale</div>
-      <p style="font-size:.82em;color:var(--muted);margin-bottom:.9rem">Questi orari si ripetono ogni settimana in automatico. Di default: Luned&igrave;&ndash;Venerd&igrave; 15:00&ndash;18:00.</p>
+      <p style="font-size:.82em;color:var(--muted);margin-bottom:.9rem">Questi orari si ripetono ogni settimana in automatico. Di default: Luned&igrave;&ndash;Venerd&igrave; 15:00&ndash;19:00.</p>
       <div class="row" style="margin-bottom:.8rem;gap:.4rem;flex-wrap:wrap">
         <select id="tpl-day" style="width:auto;padding:.42rem .6rem;font-size:.86em">
           <option value="1">Luned&igrave;</option>
@@ -408,13 +408,12 @@ function isoDate(d) { return d.toISOString().slice(0, 10); }
 function addDays(d, n)  { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
 function addWeeks(d, n) { return addDays(d, n * 7); }
 
-// ── Default template seed (Lun–Ven 15:00–18:00) ──────────────────────
+// ── Default template seed (Lun–Ven 15:00–19:00) ─────────────────────
 function seedDefaultTemplate() {
-  // Only seed if the key has never been set (null, not empty array)
   if (localStorage.getItem(K.template) !== null) return;
   const tpl = [];
   for (let dow = 1; dow <= 5; dow++) {
-    for (const time of ['15:00', '16:00', '17:00', '18:00']) {
+    for (const time of ['15:00', '16:00', '17:00', '18:00', '19:00']) {
       tpl.push({ dow, time });
     }
   }
@@ -554,7 +553,6 @@ function renderBooking() {
     return;
   }
 
-  // Group by date
   const byDate = {};
   for (const s of slots) {
     if (!byDate[s.date]) byDate[s.date] = { dateObj: s.dateObj, slots: [] };
@@ -598,7 +596,7 @@ function updateRecurringPreview() {
   document.getElementById('recurring-val').textContent = `${count}×`;
 
   if (count === 1) {
-    document.getElementById('recurring-hint').textContent   = 'Solo questa volta';
+    document.getElementById('recurring-hint').textContent    = 'Solo questa volta';
     document.getElementById('recurring-preview').textContent = '';
     return;
   }
@@ -784,7 +782,7 @@ function switchTab(tabId) {
   document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
   document.getElementById(tabId).style.display = '';
   document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
-  if (tabId === 'tab-bookings')  renderAdminBookings();
+  if (tabId === 'tab-bookings')      renderAdminBookings();
   else if (tabId === 'tab-slots')    renderAdminSlots();
   else if (tabId === 'tab-students') renderAdminStudents();
 }
@@ -845,7 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pw      = document.getElementById('reg-pw').value;
     const pw2     = document.getElementById('reg-pw2').value;
     if (!nome || !cognome || !tel || !pw) { toast('Compila tutti i campi.'); return; }
-    if (pw !== pw2)   { toast('Le password non coincidono.'); return; }
+    if (pw !== pw2)    { toast('Le password non coincidono.'); return; }
     if (pw.length < 6) { toast('Password troppo corta (min 6 caratteri).'); return; }
     if (loadArr(K.users).find(u => u.telefono === tel)) { toast('Numero già registrato.'); return; }
     const h = await sha256(pw);
@@ -866,8 +864,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-admin-setup').addEventListener('click', async () => {
     const pw  = document.getElementById('admin-setup-pw').value;
     const pw2 = document.getElementById('admin-setup-pw2').value;
-    if (!pw)          { toast('Inserisci una password.'); return; }
-    if (pw !== pw2)   { toast('Le password non coincidono.'); return; }
+    if (!pw)           { toast('Inserisci una password.'); return; }
+    if (pw !== pw2)    { toast('Le password non coincidono.'); return; }
     if (pw.length < 6) { toast('Password troppo corta.'); return; }
     localStorage.setItem(K.adminPw, await sha256(pw));
     persist(K.adminSession, true);
@@ -922,8 +920,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-change-admin-pw').addEventListener('click', async () => {
     const pw  = document.getElementById('new-admin-pw').value;
     const pw2 = document.getElementById('new-admin-pw2').value;
-    if (!pw)          { toast('Inserisci la nuova password.'); return; }
-    if (pw !== pw2)   { toast('Le password non coincidono.'); return; }
+    if (!pw)           { toast('Inserisci la nuova password.'); return; }
+    if (pw !== pw2)    { toast('Le password non coincidono.'); return; }
     if (pw.length < 6) { toast('Password troppo corta.'); return; }
     localStorage.setItem(K.adminPw, await sha256(pw));
     document.getElementById('new-admin-pw').value  = '';
