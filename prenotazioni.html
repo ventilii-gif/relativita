@@ -20,7 +20,7 @@ html,body{background:var(--bg);color:var(--text);font-family:-apple-system,Blink
 
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:.7rem 1rem;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:.6rem}
 header h1{font-size:clamp(.95rem,3.5vw,1.2rem);color:var(--text);font-weight:700;letter-spacing:-.01em}
-.hdr-right{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.hdr-right{display:flex;align-items:center;gap:.5rem}
 .hdr-user{font-size:.82em;color:var(--muted)}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.35rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:8px;padding:.42rem .85rem;font-size:.87em;cursor:pointer;font-family:inherit;font-weight:600;transition:background .15s,border-color .15s,color .15s;white-space:nowrap;text-decoration:none;line-height:1.4}
@@ -48,11 +48,19 @@ input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0
 textarea{resize:vertical;min-height:72px}
 .hint{font-size:.77em;color:var(--muted);margin-top:.2rem}
 
-.slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.45rem;margin-bottom:.8rem}
-.slot-btn{background:var(--surface2);border:2px solid var(--border);border-radius:10px;padding:.65rem .4rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;font-family:inherit;font-size:.84em;font-weight:700;color:var(--text)}
+/* Slot day-grouped layout */
+.day-group{margin-bottom:1.1rem}
+.day-hdr{font-size:.77em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;padding-bottom:.25rem;border-bottom:1px solid var(--border)}
+.slots-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+.slot-btn{background:var(--surface2);border:2px solid var(--border);border-radius:10px;padding:.6rem .7rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s,color .15s;font-family:inherit;font-size:.9em;font-weight:700;color:var(--text);min-width:100px;line-height:1.3}
 .slot-btn:hover{border-color:var(--primary);background:var(--primary-l)}
 .slot-btn.selected{border-color:var(--primary);background:var(--primary);color:#fff}
-.slot-btn .sd{display:block;font-size:.73em;font-weight:400;margin-top:.1rem;opacity:.85}
+.slot-btn.selected .sl{color:rgba(255,255,255,.8)}
+.slot-btn.na{cursor:default;opacity:.55;background:var(--surface2);border-color:var(--border)}
+.slot-btn.na:hover{background:var(--surface2);border-color:var(--border);color:var(--text)}
+.sl{display:block;font-size:.68em;font-weight:600;margin-top:.18rem;letter-spacing:.02em}
+.sl.ok{color:var(--ok)}
+.sl.no{color:var(--muted)}
 
 .tag{display:inline-block;padding:.18rem .52rem;border-radius:999px;font-size:.73em;font-weight:700;letter-spacing:.03em;vertical-align:middle}
 .tag-ok{background:var(--ok-l);color:var(--ok)}
@@ -75,7 +83,6 @@ textarea{resize:vertical;min-height:72px}
 .empty{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.88em}
 .sect-title{font-size:1.15rem;font-weight:700;margin-bottom:.9rem}
 .center{text-align:center}
-.mt{margin-top:.8rem}
 .narrow{max-width:420px;margin:2rem auto}
 
 .toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:.55rem 1.15rem;border-radius:8px;font-size:.86em;z-index:9999;opacity:0;transition:opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
@@ -176,28 +183,27 @@ textarea{resize:vertical;min-height:72px}
   </div>
 
   <div class="card">
-    <div class="card-title">1 · Scegli lo slot</div>
-    <p style="font-size:.83em;color:var(--muted);margin-bottom:.9rem">Orari disponibili nelle prossime 4 settimane</p>
-    <div class="slots-grid" id="slots-grid"></div>
-    <div id="slots-empty" class="empty" style="display:none">Nessuno slot disponibile nelle prossime 4 settimane.<br>L'amministratore non ha ancora configurato gli orari.</div>
+    <div class="card-title">1 &middot; Scegli lo slot</div>
+    <p style="font-size:.83em;color:var(--muted);margin-bottom:.9rem">Orari nelle prossime 4 settimane &mdash; clicca uno slot <span style="color:var(--ok);font-weight:600">prenotabile</span> per selezionarlo.</p>
+    <div id="slots-container"></div>
   </div>
 
   <div class="card" id="book-recurring-card" style="display:none">
-    <div class="card-title">2 · Quante volte? (stesso giorno e ora)</div>
+    <div class="card-title">2 &middot; Quante volte? (stesso giorno e ora ogni settimana)</div>
     <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.4rem">
       <input type="range" id="recurring-range" min="1" max="10" value="1" style="flex:1;width:auto">
-      <span id="recurring-val" style="font-size:1.15em;font-weight:700;color:var(--primary);min-width:2.5em;text-align:right">1×</span>
+      <span id="recurring-val" style="font-size:1.15em;font-weight:700;color:var(--primary);min-width:2.5em;text-align:right">1&times;</span>
     </div>
     <div class="hint" id="recurring-hint">Solo questa volta</div>
     <div id="recurring-preview" style="font-size:.8em;color:var(--muted);margin-top:.5rem;line-height:1.7"></div>
   </div>
 
   <div class="card" id="book-details-card" style="display:none">
-    <div class="card-title">3 · Dettagli lezione</div>
+    <div class="card-title">3 &middot; Dettagli lezione</div>
     <div class="form-group">
       <label class="lbl">Materia</label>
       <select id="book-subject">
-        <option value="">— Scegli —</option>
+        <option value="">&mdash; Scegli &mdash;</option>
         <option value="Matematica">Matematica</option>
         <option value="Fisica">Fisica</option>
       </select>
@@ -268,7 +274,7 @@ textarea{resize:vertical;min-height:72px}
       <div id="admin-bookings-list"></div>
     </div>
     <div class="card" style="font-size:.83em;color:var(--muted);padding:.9rem 1.1rem">
-      <strong style="color:var(--warn)">&#x23F0; Promemoria</strong>: gli studenti con lezione domani sono marcati con <span class="tag tag-warn">Ricorda domani</span>. Contattali entro le 15:00 per la conferma. Una lezione confermata il giorno prima &egrave; dovuta anche se non svolta.
+      <strong style="color:var(--warn)">&#x23F0; Promemoria</strong>: gli studenti con lezione domani sono marcati <span class="tag tag-warn">Ricorda domani</span>. Contattali entro le 15:00 per la conferma. Una lezione confermata il giorno prima &egrave; dovuta anche se non svolta.
     </div>
   </div>
 
@@ -276,7 +282,7 @@ textarea{resize:vertical;min-height:72px}
   <div id="tab-slots" class="tab-pane" style="display:none">
     <div class="card" style="margin-top:.7rem">
       <div class="card-title">Template settimanale</div>
-      <p style="font-size:.82em;color:var(--muted);margin-bottom:.9rem">Questi orari si ripetono ogni settimana in automatico.</p>
+      <p style="font-size:.82em;color:var(--muted);margin-bottom:.9rem">Questi orari si ripetono ogni settimana in automatico. Di default: Luned&igrave;&ndash;Venerd&igrave; 15:00&ndash;18:00.</p>
       <div class="row" style="margin-bottom:.8rem;gap:.4rem;flex-wrap:wrap">
         <select id="tpl-day" style="width:auto;padding:.42rem .6rem;font-size:.86em">
           <option value="1">Luned&igrave;</option>
@@ -354,10 +360,10 @@ const K = {
   adminSession: 'rv_admin_session'
 };
 
-const load  = k => JSON.parse(localStorage.getItem(k) || 'null');
+const load    = k => JSON.parse(localStorage.getItem(k) || 'null');
 const loadArr = k => load(k) || [];
 const persist = (k, v) => localStorage.setItem(k, JSON.stringify(v));
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const uid     = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
 // ── Crypto ───────────────────────────────────────────────────────
 async function sha256(str) {
@@ -380,41 +386,54 @@ function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const authScreens = ['s-student', 's-book'];
-  const adminScreen = id === 's-admin';
+  const isAdmin = id === 's-admin';
   const hdr = document.getElementById('app-header');
-  hdr.style.display = (authScreens.includes(id) || adminScreen) ? '' : 'none';
+  hdr.style.display = (authScreens.includes(id) || isAdmin) ? '' : 'none';
   const hdrUser = document.getElementById('hdr-user');
   if (authScreens.includes(id)) {
     const u = load(K.session);
     hdrUser.textContent = u ? `${u.nome} ${u.cognome}` : '';
-  } else if (adminScreen) {
+  } else if (isAdmin) {
     hdrUser.textContent = 'Amministratore';
   }
 }
 
 // ── Date utilities ───────────────────────────────────────────────
-const DOW  = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
+const DOW      = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
 const DOW_FULL = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
-const MON  = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+const MON      = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
 
-function fmtDate(d) { return `${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;}
-function isoDate(d) { return d.toISOString().slice(0,10); }
-function addDays(d, n) { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
+function fmtDate(d) { return `${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`; }
+function isoDate(d) { return d.toISOString().slice(0, 10); }
+function addDays(d, n)  { const r = new Date(d); r.setDate(r.getDate() + n); return r; }
 function addWeeks(d, n) { return addDays(d, n * 7); }
 
-// ── Slot availability ─────────────────────────────────────────────
-function getAvailableSlots(weeksAhead = 4) {
-  const template   = loadArr(K.template);   // [{dow, time}]
-  const exceptions = loadArr(K.exceptions); // [{date, time, type}]
-  const bookings   = loadArr(K.bookings);   // [{date, time, status}]
+// ── Default template seed (Lun–Ven 15:00–18:00) ──────────────────────
+function seedDefaultTemplate() {
+  // Only seed if the key has never been set (null, not empty array)
+  if (localStorage.getItem(K.template) !== null) return;
+  const tpl = [];
+  for (let dow = 1; dow <= 5; dow++) {
+    for (const time of ['15:00', '16:00', '17:00', '18:00']) {
+      tpl.push({ dow, time });
+    }
+  }
+  persist(K.template, tpl);
+}
+
+// ── Slot computation ───────────────────────────────────────────────
+function getAllSlots(weeksAhead = 4) {
+  const template   = loadArr(K.template);
+  const exceptions = loadArr(K.exceptions);
+  const bookings   = loadArr(K.bookings);
   const booked = new Set(bookings.filter(b => b.status !== 'annullata').map(b => `${b.date}|${b.time}`));
 
-  const today = new Date(); today.setHours(0,0,0,0);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
   const result = [];
 
   for (let i = 1; i <= weeksAhead * 7; i++) {
-    const d  = addDays(today, i);
-    const ds = isoDate(d);
+    const d   = addDays(today, i);
+    const ds  = isoDate(d);
     const dow = d.getDay();
 
     const times = new Set(template.filter(t => t.dow == dow).map(t => t.time));
@@ -423,7 +442,7 @@ function getAvailableSlots(weeksAhead = 4) {
       else                     times.delete(e.time);
     }
     for (const t of [...times].sort()) {
-      if (!booked.has(`${ds}|${t}`)) result.push({ date: ds, time: t, dateObj: d });
+      result.push({ date: ds, time: t, dateObj: d, available: !booked.has(`${ds}|${t}`) });
     }
   }
   return result;
@@ -436,9 +455,9 @@ function getRecurringDates(startDate, time, count) {
   const bookings   = loadArr(K.bookings);
   const booked = new Set(bookings.filter(b => b.status !== 'annullata').map(b => `${b.date}|${b.time}`));
 
-  const dates = [startDate];
-  let d = new Date(startDate + 'T00:00:00');
-  let safety = 0;
+  const dates  = [startDate];
+  let d        = new Date(startDate + 'T00:00:00');
+  let safety   = 0;
 
   while (dates.length < count && safety < 120) {
     safety++;
@@ -473,37 +492,31 @@ function renderStudentDashboard() {
     return;
   }
 
-  // Split upcoming vs past
   const upcoming = bookings.filter(b => b.date >= today && b.status !== 'annullata');
-  const past = bookings.filter(b => b.date < today || b.status === 'annullata');
+  const past     = bookings.filter(b => b.date <  today || b.status === 'annullata');
 
   let html = '';
-
   if (upcoming.length) {
     html += `<div class="card-title" style="margin-bottom:.5rem">Prossime lezioni</div>`;
     html += upcoming.map(b => bookingCard(b, today, true)).join('');
   }
   if (past.length) {
     html += `<div class="sep"></div><div class="card-title" style="margin-bottom:.5rem">Storico</div>`;
-    html += past.slice(0,10).map(b => bookingCard(b, today, false)).join('');
+    html += past.slice(0, 10).map(b => bookingCard(b, today, false)).join('');
   }
   el.innerHTML = html;
 }
 
 function bookingCard(b, today, canCancel) {
   const d = new Date(b.date + 'T00:00:00');
-  const isPast = b.date < today;
   let tag;
   if (b.status === 'annullata') tag = '<span class="tag tag-err">Annullata</span>';
-  else if (isPast)              tag = '<span class="tag tag-grey">Svolta</span>';
+  else if (b.date < today)      tag = '<span class="tag tag-grey">Svolta</span>';
   else                          tag = '<span class="tag tag-ok">Confermata</span>';
 
   return `<div class="card" style="margin-bottom:.55rem">
     <div class="row-sb">
-      <div>
-        <strong>${fmtDate(d)}</strong> alle <strong>${b.time}</strong>
-        &nbsp;${tag}
-      </div>
+      <div><strong>${fmtDate(d)}</strong> alle <strong>${b.time}</strong>&nbsp;${tag}</div>
       ${canCancel && b.status !== 'annullata' ? `<button class="btn btn-sm btn-danger" onclick="cancelBooking('${b.id}')">Annulla</button>` : ''}
     </div>
     <div style="font-size:.83em;color:var(--muted);margin-top:.3rem">${b.subject} &middot; ${escHtml(b.topic)}</div>
@@ -513,7 +526,7 @@ function bookingCard(b, today, canCancel) {
 function cancelBooking(id) {
   if (!confirm('Annullare questa prenotazione?')) return;
   const bs = loadArr(K.bookings);
-  const b = bs.find(x => x.id === id);
+  const b  = bs.find(x => x.id === id);
   if (b) { b.status = 'annullata'; persist(K.bookings, bs); }
   renderStudentDashboard();
   toast('Prenotazione annullata.');
@@ -525,39 +538,58 @@ let _sel = null;
 function renderBooking() {
   _sel = null;
   document.getElementById('book-recurring-card').style.display = 'none';
-  document.getElementById('book-details-card').style.display = 'none';
-  document.getElementById('recurring-range').value = 1;
-  document.getElementById('recurring-val').textContent = '1×';
-  document.getElementById('recurring-hint').textContent = 'Solo questa volta';
-  document.getElementById('recurring-preview').textContent = '';
-  document.getElementById('book-subject').value = '';
-  document.getElementById('book-topic').value = '';
+  document.getElementById('book-details-card').style.display   = 'none';
+  document.getElementById('recurring-range').value             = 1;
+  document.getElementById('recurring-val').textContent         = '1×';
+  document.getElementById('recurring-hint').textContent        = 'Solo questa volta';
+  document.getElementById('recurring-preview').textContent     = '';
+  document.getElementById('book-subject').value                = '';
+  document.getElementById('book-topic').value                  = '';
 
-  const slots = getAvailableSlots(4);
-  const grid  = document.getElementById('slots-grid');
-  const empty = document.getElementById('slots-empty');
+  const slots     = getAllSlots(4);
+  const container = document.getElementById('slots-container');
 
   if (!slots.length) {
-    grid.innerHTML = '';
-    empty.style.display = '';
+    container.innerHTML = '<div class="empty">Nessuno slot configurato. Contatta l\'amministratore.</div>';
     return;
   }
-  empty.style.display = 'none';
-  grid.innerHTML = slots.map(s =>
-    `<button class="slot-btn" onclick="selectSlot(this,'${s.date}','${s.time}')">
-      ${s.time}
-      <span class="sd">${fmtDate(s.dateObj)}</span>
-    </button>`
-  ).join('');
+
+  // Group by date
+  const byDate = {};
+  for (const s of slots) {
+    if (!byDate[s.date]) byDate[s.date] = { dateObj: s.dateObj, slots: [] };
+    byDate[s.date].slots.push(s);
+  }
+
+  let html = '';
+  for (const [, { dateObj, slots: daySlots }] of Object.entries(byDate)) {
+    html += `<div class="day-group">
+      <div class="day-hdr">${fmtDate(dateObj)}</div>
+      <div class="slots-row">`;
+    for (const s of daySlots) {
+      if (s.available) {
+        html += `<button class="slot-btn" onclick="selectSlot(this,'${s.date}','${s.time}')">
+          ${s.time}<span class="sl ok">&#x25CF; prenotabile</span>
+        </button>`;
+      } else {
+        html += `<div class="slot-btn na">
+          ${s.time}<span class="sl no">&#x25CF; non prenotabile</span>
+        </div>`;
+      }
+    }
+    html += `</div></div>`;
+  }
+  container.innerHTML = html;
 }
 
 function selectSlot(btn, date, time) {
-  document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.slot-btn:not(.na)').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  _sel = {date, time};
+  _sel = { date, time };
   document.getElementById('book-recurring-card').style.display = '';
-  document.getElementById('book-details-card').style.display = '';
+  document.getElementById('book-details-card').style.display   = '';
   updateRecurringPreview();
+  document.getElementById('book-recurring-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 function updateRecurringPreview() {
@@ -566,7 +598,7 @@ function updateRecurringPreview() {
   document.getElementById('recurring-val').textContent = `${count}×`;
 
   if (count === 1) {
-    document.getElementById('recurring-hint').textContent = 'Solo questa volta';
+    document.getElementById('recurring-hint').textContent   = 'Solo questa volta';
     document.getElementById('recurring-preview').textContent = '';
     return;
   }
@@ -574,24 +606,21 @@ function updateRecurringPreview() {
   const dates = getRecurringDates(_sel.date, _sel.time, count);
   const found = dates.length;
   document.getElementById('recurring-hint').textContent =
-    found < count ? `${found} di ${count} date disponibili` : `${count} lezioni, ogni settimana`;
+    found < count ? `${found} di ${count} date trovate disponibili` : `${count} lezioni, ogni settimana`;
 
-  const preview = dates.map(ds => {
-    const dObj = new Date(ds + 'T00:00:00');
-    return fmtDate(dObj);
-  }).join(' · ');
+  const preview = dates.map(ds => fmtDate(new Date(ds + 'T00:00:00'))).join(' · ');
   document.getElementById('recurring-preview').textContent = `Date: ${preview} · ore ${_sel.time}`;
 }
 
 async function confirmBooking() {
-  if (!_sel) { toast('Seleziona uno slot.'); return; }
+  if (!_sel)  { toast('Seleziona uno slot.'); return; }
   const subject = document.getElementById('book-subject').value;
   const topic   = document.getElementById('book-topic').value.trim();
   if (!subject) { toast('Scegli la materia.'); return; }
   if (!topic)   { toast('Inserisci l\'argomento.'); return; }
 
   const count = parseInt(document.getElementById('recurring-range').value);
-  const u = load(K.session);
+  const u     = load(K.session);
   const dates = getRecurringDates(_sel.date, _sel.time, count);
 
   const bs = loadArr(K.bookings);
@@ -606,9 +635,7 @@ async function confirmBooking() {
     });
   }
   persist(K.bookings, bs);
-
-  const msg = dates.length === 1 ? 'Lezione prenotata!' : `${dates.length} lezioni prenotate!`;
-  toast(msg);
+  toast(dates.length === 1 ? 'Lezione prenotata!' : `${dates.length} lezioni prenotate!`);
   show('s-student');
   renderStudentDashboard();
 }
@@ -624,40 +651,37 @@ function renderAdminBookings() {
     .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
 
   const el = document.getElementById('admin-bookings-list');
-  if (!bs.length) {
-    el.innerHTML = '<div class="empty">Nessuna prenotazione.</div>';
-    return;
-  }
+  if (!bs.length) { el.innerHTML = '<div class="empty">Nessuna prenotazione.</div>'; return; }
 
   let html = `<table class="tbl"><thead><tr>
     <th>Data</th><th>Ora</th><th>Studente</th><th>Materia / Argomento</th><th>Stato</th><th></th>
   </tr></thead><tbody>`;
 
   for (const b of bs) {
-    const d = new Date(b.date + 'T00:00:00');
-    const isToday    = b.date === today;
+    const d          = new Date(b.date + 'T00:00:00');
     const isTomorrow = b.date === tomorrow;
     const isPast     = b.date < today;
+    const isToday    = b.date === today;
 
     let statusTag;
     if (b.status === 'annullata') statusTag = '<span class="tag tag-err">Annullata</span>';
     else if (isPast)             statusTag = '<span class="tag tag-grey">Passata</span>';
     else                         statusTag = '<span class="tag tag-ok">Confermata</span>';
 
-    const recall  = isTomorrow && b.status === 'confermata' ? ' <span class="tag tag-warn">Ricorda domani</span>' : '';
-    const todayBadge = isToday && b.status === 'confermata' ? ' <span class="tag tag-blue">Oggi</span>' : '';
+    const recall   = isTomorrow && b.status === 'confermata' ? ' <span class="tag tag-warn">Ricorda domani</span>' : '';
+    const todayBdg = isToday   && b.status === 'confermata' ? ' <span class="tag tag-blue">Oggi</span>' : '';
 
     const actions = b.status !== 'annullata'
       ? `<button class="btn btn-sm btn-danger" onclick="adminCancel('${b.id}')">Annulla</button>`
       : `<button class="btn btn-sm" onclick="adminRestore('${b.id}')">Ripristina</button>`;
 
     html += `<tr>
-      <td>${fmtDate(d)}${todayBadge}${recall}</td>
+      <td>${fmtDate(d)}${todayBdg}${recall}</td>
       <td><strong>${b.time}</strong></td>
       <td><strong>${escHtml(b.nome)} ${escHtml(b.cognome)}</strong><br>
-        <a href="tel:${escHtml(b.telefono)}" style="font-size:.82em;color:var(--primary)">${escHtml(b.telefono)}</a>
-      </td>
-      <td style="max-width:200px">${b.subject}<br><span style="font-size:.82em;color:var(--muted)">${escHtml(b.topic)}</span></td>
+        <a href="tel:${escHtml(b.telefono)}" style="font-size:.82em;color:var(--primary)">${escHtml(b.telefono)}</a></td>
+      <td style="max-width:200px">${b.subject}<br>
+        <span style="font-size:.82em;color:var(--muted)">${escHtml(b.topic)}</span></td>
       <td>${statusTag}</td>
       <td>${actions}</td>
     </tr>`;
@@ -669,7 +693,7 @@ function renderAdminBookings() {
 function adminCancel(id) {
   if (!confirm('Annullare questa prenotazione?')) return;
   const bs = loadArr(K.bookings);
-  const b = bs.find(x => x.id === id);
+  const b  = bs.find(x => x.id === id);
   if (b) { b.status = 'annullata'; persist(K.bookings, bs); }
   renderAdminBookings();
   toast('Prenotazione annullata.');
@@ -677,7 +701,7 @@ function adminCancel(id) {
 
 function adminRestore(id) {
   const bs = loadArr(K.bookings);
-  const b = bs.find(x => x.id === id);
+  const b  = bs.find(x => x.id === id);
   if (b) { b.status = 'confermata'; persist(K.bookings, bs); }
   renderAdminBookings();
   toast('Prenotazione ripristinata.');
@@ -688,14 +712,13 @@ function renderAdminStudents() {
   const users = loadArr(K.users);
   const bs    = loadArr(K.bookings);
   const el    = document.getElementById('admin-students-list');
-
   if (!users.length) { el.innerHTML = '<div class="empty">Nessuno studente registrato.</div>'; return; }
 
   let html = `<table class="tbl"><thead><tr>
-    <th>Nome</th><th>Telefono</th><th>Lezioni (attive)</th><th>Registrato il</th>
+    <th>Nome</th><th>Telefono</th><th>Lezioni attive</th><th>Registrato il</th>
   </tr></thead><tbody>`;
   for (const u of users) {
-    const active = bs.filter(b => b.userId === u.id && b.status === 'confermata').length;
+    const active  = bs.filter(b => b.userId === u.id && b.status === 'confermata').length;
     const regDate = new Date(u.createdAt).toLocaleDateString('it-IT');
     html += `<tr>
       <td><strong>${escHtml(u.nome)} ${escHtml(u.cognome)}</strong></td>
@@ -717,7 +740,7 @@ function renderAdminSlots() {
   if (!tpl.length) {
     tplEl.innerHTML = '<div class="empty" style="padding:.7rem 0">Nessun orario. Aggiungine uno.</div>';
   } else {
-    const sorted = [...tpl].sort((a,b) => a.dow - b.dow || a.time.localeCompare(b.time));
+    const sorted = [...tpl].sort((a, b) => a.dow - b.dow || a.time.localeCompare(b.time));
     tplEl.innerHTML = sorted.map(t =>
       `<div class="row-sb" style="padding:.4rem 0;border-bottom:1px solid var(--border)">
         <span>${DOW_FULL[t.dow]} &middot; <strong>${t.time}</strong></span>
@@ -730,9 +753,9 @@ function renderAdminSlots() {
   if (!exc.length) {
     excEl.innerHTML = '<div class="empty" style="padding:.7rem 0">Nessuna eccezione.</div>';
   } else {
-    const sorted = [...exc].sort((a,b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+    const sorted = [...exc].sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
     excEl.innerHTML = sorted.map(e => {
-      const dObj = new Date(e.date + 'T00:00:00');
+      const dObj    = new Date(e.date + 'T00:00:00');
       const typeTag = e.type === 'add'
         ? '<span class="tag tag-ok">+Aggiunto</span>'
         : '<span class="tag tag-err">&minus;Rimosso</span>';
@@ -761,7 +784,7 @@ function switchTab(tabId) {
   document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
   document.getElementById(tabId).style.display = '';
   document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
-  if (tabId === 'tab-bookings') renderAdminBookings();
+  if (tabId === 'tab-bookings')  renderAdminBookings();
   else if (tabId === 'tab-slots')    renderAdminSlots();
   else if (tabId === 'tab-students') renderAdminStudents();
 }
@@ -773,12 +796,9 @@ function escHtml(s) {
 
 // ── Bootstrap ────────────────────────────────────────────────────
 function init() {
+  seedDefaultTemplate();
   const session = load(K.session);
-  if (session) {
-    show('s-student');
-    renderStudentDashboard();
-    return;
-  }
+  if (session) { show('s-student'); renderStudentDashboard(); return; }
   show('s-welcome');
 }
 
@@ -786,7 +806,6 @@ function init() {
 document.addEventListener('DOMContentLoaded', () => {
   init();
 
-  // Navigation
   document.getElementById('go-register').addEventListener('click', e => { e.preventDefault(); show('s-register'); });
   document.getElementById('go-login').addEventListener('click', e => { e.preventDefault(); show('s-welcome'); });
   document.getElementById('go-welcome').addEventListener('click', e => { e.preventDefault(); show('s-welcome'); });
@@ -798,7 +817,6 @@ document.addEventListener('DOMContentLoaded', () => {
     show('s-admin-login');
   });
 
-  // Student logout
   document.getElementById('btn-logout').addEventListener('click', () => {
     localStorage.removeItem(K.session);
     show('s-welcome');
@@ -811,15 +829,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const tel = document.getElementById('login-tel').value.trim();
     const pw  = document.getElementById('login-pw').value;
     if (!tel || !pw) { toast('Compila tutti i campi.'); return; }
-    const users = loadArr(K.users);
     const h = await sha256(pw);
-    const u = users.find(x => x.telefono === tel && x.pwHash === h);
+    const u = loadArr(K.users).find(x => x.telefono === tel && x.pwHash === h);
     if (!u) { toast('Telefono o password errati.'); return; }
-    persist(K.session, {id: u.id, nome: u.nome, cognome: u.cognome, telefono: u.telefono});
-    show('s-student');
-    renderStudentDashboard();
+    persist(K.session, { id: u.id, nome: u.nome, cognome: u.cognome, telefono: u.telefono });
+    show('s-student'); renderStudentDashboard();
   });
-  document.getElementById('login-pw').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('btn-login').click(); });
+  document.getElementById('login-pw').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btn-login').click(); });
 
   // Register
   document.getElementById('btn-register').addEventListener('click', async () => {
@@ -829,21 +845,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const pw      = document.getElementById('reg-pw').value;
     const pw2     = document.getElementById('reg-pw2').value;
     if (!nome || !cognome || !tel || !pw) { toast('Compila tutti i campi.'); return; }
-    if (pw !== pw2) { toast('Le password non coincidono.'); return; }
+    if (pw !== pw2)   { toast('Le password non coincidono.'); return; }
     if (pw.length < 6) { toast('Password troppo corta (min 6 caratteri).'); return; }
-    const users = loadArr(K.users);
-    if (users.find(u => u.telefono === tel)) { toast('Numero già registrato.'); return; }
+    if (loadArr(K.users).find(u => u.telefono === tel)) { toast('Numero già registrato.'); return; }
     const h = await sha256(pw);
-    const u = {id: uid(), nome, cognome, telefono: tel, pwHash: h, createdAt: new Date().toISOString()};
-    users.push(u);
-    persist(K.users, users);
-    persist(K.session, {id: u.id, nome, cognome, telefono: tel});
-    show('s-student');
-    renderStudentDashboard();
+    const u = { id: uid(), nome, cognome, telefono: tel, pwHash: h, createdAt: new Date().toISOString() };
+    const users = loadArr(K.users); users.push(u); persist(K.users, users);
+    persist(K.session, { id: u.id, nome, cognome, telefono: tel });
+    show('s-student'); renderStudentDashboard();
     toast(`Benvenuto, ${nome}!`);
   });
 
-  // Student: new booking
+  // Booking wizard
   document.getElementById('btn-new-booking').addEventListener('click', () => { show('s-book'); renderBooking(); });
   document.getElementById('btn-back-student').addEventListener('click', () => { show('s-student'); renderStudentDashboard(); });
   document.getElementById('recurring-range').addEventListener('input', updateRecurringPreview);
@@ -853,13 +866,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-admin-setup').addEventListener('click', async () => {
     const pw  = document.getElementById('admin-setup-pw').value;
     const pw2 = document.getElementById('admin-setup-pw2').value;
-    if (!pw) { toast('Inserisci una password.'); return; }
-    if (pw !== pw2) { toast('Le password non coincidono.'); return; }
+    if (!pw)          { toast('Inserisci una password.'); return; }
+    if (pw !== pw2)   { toast('Le password non coincidono.'); return; }
     if (pw.length < 6) { toast('Password troppo corta.'); return; }
     localStorage.setItem(K.adminPw, await sha256(pw));
     persist(K.adminSession, true);
-    show('s-admin');
-    switchTab('tab-bookings');
+    show('s-admin'); switchTab('tab-bookings');
     toast('Password impostata. Benvenuto!');
   });
 
@@ -870,18 +882,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (h !== localStorage.getItem(K.adminPw)) { toast('Password errata.'); return; }
     persist(K.adminSession, true);
     document.getElementById('admin-pw-input').value = '';
-    show('s-admin');
-    switchTab('tab-bookings');
+    show('s-admin'); switchTab('tab-bookings');
   });
-  document.getElementById('admin-pw-input').addEventListener('keydown', e => { if (e.key==='Enter') document.getElementById('btn-admin-login').click(); });
+  document.getElementById('admin-pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('btn-admin-login').click(); });
 
-  // Admin logout
   document.getElementById('btn-admin-logout').addEventListener('click', () => {
     localStorage.removeItem(K.adminSession);
     show('s-welcome');
   });
 
-  // Admin tabs
   document.querySelectorAll('[data-tab]').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
 
   // Admin: add template slot
@@ -891,9 +900,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!time) { toast('Seleziona un orario.'); return; }
     const t = loadArr(K.template);
     if (t.find(x => x.dow === dow && x.time === time)) { toast('Slot già presente.'); return; }
-    t.push({dow, time}); persist(K.template, t);
-    renderAdminSlots();
-    toast('Slot aggiunto al template.');
+    t.push({ dow, time }); persist(K.template, t);
+    renderAdminSlots(); toast('Slot aggiunto.');
   });
 
   // Admin: add exception
@@ -904,20 +912,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!date || !time) { toast('Inserisci data e ora.'); return; }
     const e = loadArr(K.exceptions);
     if (e.find(x => x.date===date && x.time===time && x.type===type)) { toast('Eccezione già presente.'); return; }
-    e.push({date, time, type}); persist(K.exceptions, e);
-    renderAdminSlots();
-    toast('Eccezione aggiunta.');
+    e.push({ date, time, type }); persist(K.exceptions, e);
+    renderAdminSlots(); toast('Eccezione aggiunta.');
   });
 
-  // Admin: filter bookings
   document.getElementById('filter-status').addEventListener('change', renderAdminBookings);
 
   // Admin: change password
   document.getElementById('btn-change-admin-pw').addEventListener('click', async () => {
     const pw  = document.getElementById('new-admin-pw').value;
     const pw2 = document.getElementById('new-admin-pw2').value;
-    if (!pw) { toast('Inserisci la nuova password.'); return; }
-    if (pw !== pw2) { toast('Le password non coincidono.'); return; }
+    if (!pw)          { toast('Inserisci la nuova password.'); return; }
+    if (pw !== pw2)   { toast('Le password non coincidono.'); return; }
     if (pw.length < 6) { toast('Password troppo corta.'); return; }
     localStorage.setItem(K.adminPw, await sha256(pw));
     document.getElementById('new-admin-pw').value  = '';
