@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Prenotazioni Lezioni</title>
+<style>
+:root {
+  --bg:#f7f8fa; --surface:#fff; --surface2:#f9fafc;
+  --primary:#1565c0; --primary-d:#0d47a1; --primary-l:#eef3fb;
+  --ok:#2e7d32; --ok-l:#e8f5e9;
+  --warn:#f57c00; --warn-l:#fff3e0;
+  --err:#c62828; --err-l:#ffebee;
+  --text:#1a1a2e; --muted:#6b7280; --border:#e0e4ed;
+  --radius:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;font-size:clamp(15px,2.3vw,16.5px);line-height:1.6;min-height:100dvh}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:.7rem 1rem;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+header h1{font-size:clamp(.95rem,3.5vw,1.2rem);font-weight:700;letter-spacing:-.01em}
+.hdr-right{display:flex;align-items:center;gap:.5rem}
+.hdr-user{font-size:.82em;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.35rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:8px;padding:.42rem .85rem;font-size:.87em;cursor:pointer;font-family:inherit;font-weight:600;transition:background .15s,border-color .15s,color .15s;white-space:nowrap;line-height:1.4}
+.btn:hover{background:var(--primary-l);border-color:var(--primary);color:var(--primary-d)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn-primary{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-primary:hover:not(:disabled){background:var(--primary-d);border-color:var(--primary-d);color:#fff}
+.btn-danger{background:var(--err-l);border-color:#e0b0b0;color:var(--err)}
+.btn-danger:hover:not(:disabled){background:var(--err);border-color:var(--err);color:#fff}
+.btn-sm{padding:.28rem .55rem;font-size:.8em}
+.btn-pill{border-radius:999px;background:var(--surface2);color:var(--muted)}
+.btn-pill.active{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}
+.btn-pill:hover:not(.active){background:var(--primary-l);color:var(--text);border-color:var(--primary)}
+nav.tabs{display:flex;gap:.35rem;padding:.6rem 0;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+main{padding:1.2rem 1rem 3rem;max-width:960px;margin:0 auto}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card-title{font-size:.71em;font-weight:700;letter-spacing:.09em;color:var(--muted);text-transform:uppercase;margin-bottom:.65rem}
+.form-group{margin-bottom:.9rem}
+label.lbl{display:block;font-size:.83em;font-weight:600;color:var(--muted);margin-bottom:.28rem;letter-spacing:.02em}
+input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:.52rem .8rem;font-size:.95rem;font-family:inherit;background:var(--surface);color:var(--text);transition:border-color .15s,box-shadow .15s;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l)}
+textarea{resize:vertical;min-height:72px}
+.hint{font-size:.77em;color:var(--muted);margin-top:.2rem}
+.day-group{margin-bottom:1.1rem}
+.day-hdr{font-size:.77em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-bottom:.25rem;border-bottom:1px solid var(--border)}
+.slots-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem}
+.slot-btn{background:var(--surface2);border:2px solid var(--border);border-radius:10px;padding:.6rem .7rem;text-align:center;cursor:pointer;transition:border-color .15s,background .15s,color .15s;font-family:inherit;font-size:.9em;font-weight:700;color:var(--text);min-width:100px;line-height:1.3}
+.slot-btn:hover{border-color:var(--primary);background:var(--primary-l)}
+.slot-btn.selected{border-color:var(--primary);background:var(--primary);color:#fff}
+.slot-btn.selected .sl{color:rgba(255,255,255,.8)}
+.slot-btn.na{cursor:default;opacity:.5}
+.slot-btn.na:hover{background:var(--surface2);border-color:var(--border);color:var(--text)}
+.sl{display:block;font-size:.68em;font-weight:600;margin-top:.18rem;letter-spacing:.02em}
+.sl.ok{color:var(--ok)}
+.sl.no{color:var(--muted)}
+.tag{display:inline-block;padding:.18rem .52rem;border-radius:999px;font-size:.73em;font-weight:700;letter-spacing:.03em;vertical-align:middle}
+.tag-ok{background:var(--ok-l);color:var(--ok)}
+.tag-warn{background:var(--warn-l);color:var(--warn)}
+.tag-err{background:var(--err-l);color:var(--err)}
+.tag-blue{background:var(--primary-l);color:var(--primary-d)}
+.tag-grey{background:#f1f2f4;color:#555}
+.tbl{width:100%;border-collapse:collapse;font-size:.86em}
+.tbl th{text-align:left;font-size:.7em;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:.5rem .6rem;border-bottom:2px solid var(--border)}
+.tbl td{padding:.58rem .6rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:var(--surface2)}
+.screen{display:none}
+.screen.active{display:block}
+.sep{height:1px;background:var(--border);margin:1rem 0}
+.row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
+.row-sb{display:flex;gap:.5rem;align-items:center;justify-content:space-between}
+.empty{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.88em}
+.sect-title{font-size:1.15rem;font-weight:700;margin-bottom:.9rem}
+.narrow{max-width:420px;margin:2rem auto}
+.toast{position:fixed;bottom:1.4rem;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:.55rem 1.15rem;border-radius:8px;font-size:.86em;z-index:9999;opacity:0;transition:opacity .25s;pointer-events:none;max-width:88vw;text-align:center}
+.toast.show{opacity:1}
+@media(max-width:600px){.tbl td:nth-child(4),.tbl th:nth-child(4){display:none}.tbl{font-size:.8em}}
+</style>
+</head>
+<body>
+
+<header id="app-header" style="display:none">
+  <h1>&#x1F4D0; Lezioni di Matematica e Fisica</h1>
+  <div class="hdr-right">
+    <span class="hdr-user" id="hdr-user"></span>
+    <button class="btn btn-sm" id="btn-logout">Esci</button>
+  </div>
+</header>
+
+<main>
+
+<!-- WELCOME -->
+<section id="s-welcome" class="screen active">
+  <div class="narrow">
+    <div style="text-align:center;margin-bottom:1.4rem">
+      <div style="font-size:2.2rem">&#x1F4D0;</div>
+      <h2 style="font-size:1.3rem;font-weight:700;margin-top:.3rem">Prenotazioni Lezioni</h2>
+      <p style="font-size:.85em;color:var(--muted);margin-top:.2rem">Accedi o registrati per prenotare le tue lezioni</p>
+    </div>
+    <div class="card">
+      <div class="card-title" style="text-align:center">Accedi</div>
+      <div class="form-group">
+        <label class="lbl">Numero di telefono</label>
+        <input type="tel" id="login-tel" placeholder="3xx xxxxxxx" autocomplete="tel">
+      </div>
+      <div class="form-group">
+        <label class="lbl">Password</label>
+        <input type="password" id="login-pw" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary" style="width:100%" id="btn-login">Accedi</button>
+      <div style="margin-top:.9rem;text-align:center;font-size:.84em">
+        Non sei registrato? <a href="#" id="go-register" style="color:var(--primary);font-weight:600">Registrati</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:.6rem">
+      <a href="#" id="go-admin" style="font-size:.78em;color:var(--muted)">Area amministratore</a>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section id="s-register" class="screen">
+  <div class="narrow">
+    <div class="card">
+      <div class="card-title" style="text-align:center">Crea account</div>
+      <div class="form-group"><label class="lbl">Nome</label><input type="text" id="reg-nome" placeholder="Mario" autocomplete="given-name"></div>
+      <div class="form-group"><label class="lbl">Cognome</label><input type="text" id="reg-cognome" placeholder="Rossi" autocomplete="family-name"></div>
+      <div class="form-group"><label class="lbl">Numero di telefono</label><input type="tel" id="reg-tel" placeholder="3xx xxxxxxx" autocomplete="tel"></div>
+      <div class="form-group">
+        <label class="lbl">Password</label>
+        <input type="password" id="reg-pw" autocomplete="new-password">
+        <div class="hint">Minimo 6 caratteri</div>
+      </div>
+      <div class="form-group"><label class="lbl">Conferma password</label><input type="password" id="reg-pw2" autocomplete="new-password"></div>
+      <button class="btn btn-primary" style="width:100%" id="btn-register">Registrati</button>
+      <div style="margin-top:.9rem;text-align:center;font-size:.84em">
+        Hai gi&agrave; un account? <a href="#" id="go-login" style="color:var(--primary);font-weight:600">Accedi</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDENT DASHBOARD -->
+<section id="s-student" class="screen">
+  <div class="row-sb" style="margin-bottom:1rem">
+    <h2 class="sect-title" style="margin:0" id="student-greeting">Ciao!</h2>
+    <button class="btn btn-primary" id="btn-new-booking">+ Prenota lezione</button>
+  </div>
+  <div id="student-bookings"></div>
+</section>
+
+<!-- BOOKING WIZARD -->
+<section id="s-book" class="screen">
+  <div class="row" style="margin-bottom:1rem">
+    <button class="btn btn-sm" id="btn-back-student">&larr; Indietro</button>
+    <h2 class="sect-title" style="margin:0">Nuova prenotazione</h2>
+  </div>
+  <div class="card">
+    <div class="card-title">1 &middot; Scegli lo slot</div>
+    <p style="font-size:.83em;color:var(--muted);margin-bottom:.9rem">Orari nelle prossime 4 settimane &mdash; clicca uno slot <span style="color:var(--ok);font-weight:600">prenotabile</span> per selezionarlo.</p>
+    <div id="slots-container"></div>
+  </div>
+  <div class="card" id="book-recurring-card" style="display:none">
+    <div class="card-title">2 &middot; Quante volte? (stesso giorno e ora ogni settimana)</div>
+    <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.4rem">
+      <input type="range" id="recurring-range" min="1" max="10" value="1" style="flex:1;width:auto">
+      <span id="recurring-val" style="font-size:1.15em;font-weight:700;color:var(--primary);min-width:2.5em;text-align:right">1&times;</span>
+    </div>
+    <div class="hint" id="recurring-hint">Solo questa volta</div>
+    <div id="recurring-preview" style="font-size:.8em;color:var(--muted);margin-top:.5rem;line-height:1.7"></div>
+  </div>
+  <div class="card" id="book-details-card" style="display:none">
+    <div class="card-title">3 &middot; Dettagli lezione</div>
+    <div class="form-group">
+      <label class="lbl">Materia</label>
+      <select id="book-subject">
+        <option value="">&mdash; Scegli &mdash;</option>
+        <option value="Matematica">Matematica</option>
+        <option value="Fisica">Fisica</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="lbl">Argomento</label>
+      <textarea id="book-topic" placeholder="Es. Derivate, Limiti, Cinematica..."></textarea>
+    </div>
+    <button class="btn btn-primary" id="btn-confirm-booking">Conferma prenotazione</button>
+  </div>
+</section>
+
+<!-- ADMIN LOGIN -->
+<section id="s-admin-login" class="screen">
+  <div class="narrow">
+    <div class="card">
+      <div class="card-title" style="text-align:center">Accesso amministratore</div>
+      <div id="admin-first-setup" style="display:none">
+        <p style="font-size:.83em;color:var(--muted);margin-bottom:.8rem">Prima configurazione: imposta la password amministratore.</p>
+        <div class="form-group"><label class="lbl">Nuova password admin</label><input type="password" id="admin-setup-pw"></div>
+        <div class="form-group"><label class="lbl">Conferma password</label><input type="password" id="admin-setup-pw2"></div>
+        <button class="btn btn-primary" style="width:100%" id="btn-admin-setup">Imposta e accedi</button>
+      </div>
+      <div id="admin-login-form">
+        <div class="form-group"><label class="lbl">Password</label><input type="password" id="admin-pw-input"></div>
+        <button class="btn btn-primary" style="width:100%" id="btn-admin-login">Accedi</button>
+      </div>
+      <div style="margin-top:.9rem;text-align:center;font-size:.83em">
+        <a href="#" id="go-welcome" style="color:var(--muted)">&larr; Torna alla home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
+<section id="s-admin" class="screen">
+  <div class="row-sb" style="margin-bottom:.4rem">
+    <h2 class="sect-title" style="margin:0">Amministratore</h2>
+    <button class="btn btn-sm btn-danger" id="btn-admin-logout">Esci</button>
+  </div>
+  <nav class="tabs">
+    <button class="btn btn-pill active" data-tab="tab-bookings">Prenotazioni</button>
+    <button class="btn btn-pill" data-tab="tab-slots">Orari</button>
+    <button class="btn btn-pill" data-tab="tab-students">Studenti</button>
+    <button class="btn btn-pill" data-tab="tab-settings">Impostazioni</button>
+  </nav>
+
+  <div id="tab-bookings" class="tab-pane">
+    <div class="card" style="margin-top:.7rem">
+      <div class="row-sb" style="margin-bottom:.7rem">
+        <div class="card-title" style="margin:0">Tutte le prenotazioni</div>
+        <select id="filter-status" style="width:auto;padding:.3rem .55rem;font-size:.82em">
+          <option value="">Tutti gli stati</option>
+          <option value="confermata">Confermate</option>
+          <option value="annullata">Annullate</option>
+        </select>
+      </div>
+      <div id="admin-bookings-list"></div>
+    </div>
+    <div class="card" style="font-size:.83em;color:var(--muted);padding:.9rem 1.1rem">
+      <strong style="color:var(--warn)">&#x23F0; Promemoria</strong>: gli studenti con lezione domani sono marcati <span class="tag tag-warn">Ricorda domani</span>. Contattali entro le 15:00 per la conferma. Una lezione confermata il giorno prima &egrave; dovuta anche se non svolta.
+    </div>
+  </div>
+
+  <div id="tab-slots" class="tab-pane" style="display:none">
+    <div class="card" style="margin-top:.7rem">
+      <div class="card-title">Template settimanale</div>
+      <p style="font-size:.82em;color:var(--muted);margin-bottom:.9rem">Di default: Luned&igrave;&ndash;Venerd&igrave; 15:00&ndash;19:00. Ripetuto ogni settimana in automatico.</p>
+      <div class="row" style="margin-bottom:.8rem;gap:.4rem;flex-wrap:wrap">
+        <select id="tpl-day" style="width:auto;padding:.42rem .6rem;font-size:.86em">
+          <option value="1">Luned&igrave;</option><option value="2">Marted&igrave;</option>
+          <option value="3">Mercoled&igrave;</option><option value="4">Gioved&igrave;</option>
+          <option value="5">Venerd&igrave;</option><option value="6">Sabato</option><option value="0">Domenica</option>
+        </select>
+        <input type="time" id="tpl-time" style="width:auto;padding:.42rem .6rem;font-size:.86em">
+        <button class="btn btn-sm btn-primary" id="btn-add-tpl">+ Aggiungi</button>
+      </div>
+      <div id="tpl-list"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Eccezioni per data specifica</div>
+      <p style="font-size:.82em;color:var(--muted);margin-bottom:.9rem">Aggiungi o rimuovi uno slot per una data precisa (ferie, imprevisti).</p>
+      <div class="row" style="margin-bottom:.8rem;gap:.4rem;flex-wrap:wrap">
+        <input type="date" id="exc-date" style="width:auto;padding:.42rem .6rem;font-size:.86em">
+        <input type="time" id="exc-time" style="width:auto;padding:.42rem .6rem;font-size:.86em">
+        <select id="exc-type" style="width:auto;padding:.42rem .6rem;font-size:.86em">
+          <option value="add">Aggiungi slot</option>
+          <option value="remove">Rimuovi slot</option>
+        </select>
+        <button class="btn btn-sm btn-primary" id="btn-add-exc">+ Aggiungi</button>
+      </div>
+      <div id="exc-list"></div>
+    </div>
+  </div>
+
+  <div id="tab-students" class="tab-pane" style="display:none">
+    <div class="card" style="margin-top:.7rem">
+      <div class="card-title">Studenti registrati</div>
+      <div id="admin-students-list"></div>
+    </div>
+  </div>
+
+  <div id="tab-settings" class="tab-pane" style="display:none">
+    <div class="card" style="margin-top:.7rem">
+      <div class="card-title">Cambia password amministratore</div>
+      <div class="form-group"><label class="lbl">Nuova password</label><input type="password" id="new-admin-pw"></div>
+      <div class="form-group"><label class="lbl">Conferma password</label><input type="password" id="new-admin-pw2"></div>
+      <button class="btn btn-primary" id="btn-change-admin-pw">Salva password</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Session ───────────────────────────────────────────────────────
+let _token   = localStorage.getItem('rv_token')   || '';
+let _session = JSON.parse(localStorage.getItem('rv_session') || 'null');
+
+function saveSession(token, session) {
+  _token = token; _session = session;
+  localStorage.setItem('rv_token', token);
+  localStorage.setItem('rv_session', JSON.stringify(session));
+}
+function clearSession() {
+  _token = ''; _session = null;
+  localStorage.removeItem('rv_token');
+  localStorage.removeItem('rv_session');
+}
+
+// ── API helper ────────────────────────────────────────────────────
+async function api(method, path, body) {
+  const r = await fetch('/api' + path, {
+    method,
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${_token}` },
+    body: body !== undefined ? JSON.stringify(body) : undefined
+  });
+  if (r.status === 401) {
+    clearSession(); show('s-welcome');
+    toast('Sessione scaduta. Accedi di nuovo.');
+    throw new Error('__401__');
+  }
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || 'Errore server');
+  return data;
+}
+
+// ── Toast ─────────────────────────────────────────────────────────
+let _tt;
+function toast(msg, ms = 2800) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(_tt); _tt = setTimeout(() => el.classList.remove('show'), ms);
+}
+
+// ── Router ────────────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const hdr = document.getElementById('app-header');
+  hdr.style.display = ['s-student','s-book','s-admin'].includes(id) ? '' : 'none';
+  const hdrUser = document.getElementById('hdr-user');
+  if (id === 's-admin') hdrUser.textContent = 'Amministratore';
+  else if (_session?.type === 'student') hdrUser.textContent = `${_session.nome} ${_session.cognome}`;
+  else hdrUser.textContent = '';
+}
+
+// ── Date utilities ────────────────────────────────────────────────
+const DOW      = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
+const DOW_FULL = ['Domenica','Lunedì','Martedì','Mercoledì','Giovedì','Venerdì','Sabato'];
+const MON      = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+
+function fmtDate(ds) {
+  const d = new Date(ds + 'T00:00:00');
+  return `${DOW[d.getDay()]} ${d.getDate()} ${MON[d.getMonth()]}`;
+}
+function isoToday() { return new Date().toISOString().slice(0,10); }
+function isoTomorrow() { const d=new Date(); d.setDate(d.getDate()+1); return d.toISOString().slice(0,10); }
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── Student: dashboard ────────────────────────────────────────────
+async function renderStudentDashboard() {
+  document.getElementById('student-greeting').textContent = `Ciao, ${_session.nome}!`;
+  const el = document.getElementById('student-bookings');
+  el.innerHTML = '<div class="empty">Caricamento...</div>';
+  try {
+    const all = (await api('GET', '/bookings')).sort((a,b) => a.date.localeCompare(b.date));
+    if (!all.length) { el.innerHTML = '<div class="empty">Nessuna lezione prenotata.<br>Clicca "+ Prenota lezione" per iniziare.</div>'; return; }
+    const today    = isoToday();
+    const upcoming = all.filter(b => b.date >= today && b.status !== 'annullata');
+    const past     = all.filter(b => b.date <  today || b.status === 'annullata');
+    let html = '';
+    if (upcoming.length) {
+      html += '<div class="card-title" style="margin-bottom:.5rem">Prossime lezioni</div>';
+      html += upcoming.map(b => bookingCard(b, today, true)).join('');
+    }
+    if (past.length) {
+      html += '<div class="sep"></div><div class="card-title" style="margin-bottom:.5rem">Storico</div>';
+      html += past.slice(0,10).map(b => bookingCard(b, today, false)).join('');
+    }
+    el.innerHTML = html;
+  } catch(e) { if (e.message !== '__401__') el.innerHTML = '<div class="empty">Errore nel caricamento.</div>'; }
+}
+
+function bookingCard(b, today, canCancel) {
+  let tag;
+  if (b.status === 'annullata') tag = '<span class="tag tag-err">Annullata</span>';
+  else if (b.date < today)      tag = '<span class="tag tag-grey">Svolta</span>';
+  else                          tag = '<span class="tag tag-ok">Confermata</span>';
+  return `<div class="card" style="margin-bottom:.55rem">
+    <div class="row-sb">
+      <div><strong>${fmtDate(b.date)}</strong> alle <strong>${b.time}</strong>&nbsp;${tag}</div>
+      ${canCancel && b.status !== 'annullata' ? `<button class="btn btn-sm btn-danger" onclick="cancelBooking('${b.id}')">Annulla</button>` : ''}
+    </div>
+    <div style="font-size:.83em;color:var(--muted);margin-top:.3rem">${escHtml(b.subject)} &middot; ${escHtml(b.topic)}</div>
+  </div>`;
+}
+
+async function cancelBooking(id) {
+  if (!confirm('Annullare questa prenotazione?')) return;
+  try { await api('PATCH', `/bookings/${id}`, { status: 'annullata' }); renderStudentDashboard(); toast('Prenotazione annullata.'); }
+  catch(e) { if (e.message !== '__401__') toast(e.message); }
+}
+
+// ── Booking wizard ─────────────────────────────────────────────────
+let _sel = null, _recTimer = null;
+
+async function renderBooking() {
+  _sel = null;
+  ['book-recurring-card','book-details-card'].forEach(id => document.getElementById(id).style.display = 'none');
+  document.getElementById('recurring-range').value = 1;
+  document.getElementById('recurring-val').textContent = '1×';
+  document.getElementById('recurring-hint').textContent = 'Solo questa volta';
+  document.getElementById('recurring-preview').textContent = '';
+  document.getElementById('book-subject').value = '';
+  document.getElementById('book-topic').value = '';
+  const container = document.getElementById('slots-container');
+  container.innerHTML = '<div class="empty">Caricamento orari...</div>';
+  try {
+    const slots = await api('GET', '/slots?weeks=4');
+    if (!slots.length) { container.innerHTML = '<div class="empty">Nessuno slot disponibile nelle prossime 4 settimane.</div>'; return; }
+    const byDate = {};
+    for (const s of slots) {
+      if (!byDate[s.date]) byDate[s.date] = [];
+      byDate[s.date].push(s);
+    }
+    let html = '';
+    for (const [date, daySlots] of Object.entries(byDate)) {
+      html += `<div class="day-group"><div class="day-hdr">${fmtDate(date)}</div><div class="slots-row">`;
+      for (const s of daySlots) {
+        if (s.available)
+          html += `<button class="slot-btn" onclick="selectSlot(this,'${s.date}','${s.time}')">${s.time}<span class="sl ok">&#x25CF; prenotabile</span></button>`;
+        else
+          html += `<div class="slot-btn na">${s.time}<span class="sl no">&#x25CF; non prenotabile</span></div>`;
+      }
+      html += '</div></div>';
+    }
+    container.innerHTML = html;
+  } catch(e) { if (e.message !== '__401__') container.innerHTML = '<div class="empty">Errore nel caricamento degli orari.</div>'; }
+}
+
+function selectSlot(btn, date, time) {
+  document.querySelectorAll('.slot-btn:not(.na)').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  _sel = { date, time };
+  document.getElementById('book-recurring-card').style.display = '';
+  document.getElementById('book-details-card').style.display   = '';
+  fetchRecurringPreview();
+  document.getElementById('book-recurring-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function fetchRecurringPreview() {
+  if (!_sel) return;
+  clearTimeout(_recTimer);
+  _recTimer = setTimeout(async () => {
+    const count = parseInt(document.getElementById('recurring-range').value);
+    document.getElementById('recurring-val').textContent = `${count}×`;
+    if (count === 1) {
+      document.getElementById('recurring-hint').textContent    = 'Solo questa volta';
+      document.getElementById('recurring-preview').textContent = '';
+      return;
+    }
+    try {
+      const dates = await api('GET', `/recurring?startDate=${_sel.date}&time=${encodeURIComponent(_sel.time)}&count=${count}`);
+      const found = dates.length;
+      document.getElementById('recurring-hint').textContent =
+        found < count ? `${found} di ${count} date disponibili` : `${count} lezioni, ogni settimana`;
+      document.getElementById('recurring-preview').textContent =
+        `Date: ${dates.map(fmtDate).join(' · ')} · ore ${_sel.time}`;
+    } catch(e) { if (e.message !== '__401__') toast('Errore nel calcolo delle date.'); }
+  }, 200);
+}
+
+async function confirmBooking() {
+  if (!_sel) { toast('Seleziona uno slot.'); return; }
+  const subject = document.getElementById('book-subject').value;
+  const topic   = document.getElementById('book-topic').value.trim();
+  if (!subject) { toast('Scegli la materia.'); return; }
+  if (!topic)   { toast("Inserisci l'argomento."); return; }
+  const count = parseInt(document.getElementById('recurring-range').value);
+  const btn   = document.getElementById('btn-confirm-booking');
+  btn.disabled = true; btn.textContent = 'Prenotazione...';
+  try {
+    const created = await api('POST', '/bookings', { startDate: _sel.date, time: _sel.time, subject, topic, count });
+    toast(created.length === 1 ? 'Lezione prenotata!' : `${created.length} lezioni prenotate!`);
+    show('s-student'); renderStudentDashboard();
+  } catch(e) { if (e.message !== '__401__') toast(e.message); }
+  finally { btn.disabled = false; btn.textContent = 'Conferma prenotazione'; }
+}
+
+// ── Admin: bookings ───────────────────────────────────────────────
+async function renderAdminBookings() {
+  const el = document.getElementById('admin-bookings-list');
+  el.innerHTML = '<div class="empty">Caricamento...</div>';
+  const filterStatus = document.getElementById('filter-status').value;
+  try {
+    const today    = isoToday();
+    const tomorrow = isoTomorrow();
+    let bs = await api('GET', '/bookings');
+    bs = bs.filter(b => !filterStatus || b.status === filterStatus)
+           .sort((a,b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
+    if (!bs.length) { el.innerHTML = '<div class="empty">Nessuna prenotazione.</div>'; return; }
+    let html = '<table class="tbl"><thead><tr><th>Data</th><th>Ora</th><th>Studente</th><th>Materia / Argomento</th><th>Stato</th><th></th></tr></thead><tbody>';
+    for (const b of bs) {
+      const isPast = b.date < today, isToday = b.date === today, isTomorrow = b.date === tomorrow;
+      let statusTag;
+      if (b.status === 'annullata') statusTag = '<span class="tag tag-err">Annullata</span>';
+      else if (isPast)             statusTag = '<span class="tag tag-grey">Passata</span>';
+      else                         statusTag = '<span class="tag tag-ok">Confermata</span>';
+      const recall   = isTomorrow && b.status === 'confermata' ? ' <span class="tag tag-warn">Ricorda domani</span>' : '';
+      const todayBdg = isToday   && b.status === 'confermata' ? ' <span class="tag tag-blue">Oggi</span>' : '';
+      const actions  = b.status !== 'annullata'
+        ? `<button class="btn btn-sm btn-danger" onclick="adminCancel('${b.id}')">Annulla</button>`
+        : `<button class="btn btn-sm" onclick="adminRestore('${b.id}')">Ripristina</button>`;
+      html += `<tr>
+        <td>${fmtDate(b.date)}${todayBdg}${recall}</td>
+        <td><strong>${b.time}</strong></td>
+        <td><strong>${escHtml(b.nome)} ${escHtml(b.cognome)}</strong><br>
+          <a href="tel:${escHtml(b.telefono)}" style="font-size:.82em;color:var(--primary)">${escHtml(b.telefono)}</a></td>
+        <td style="max-width:200px">${escHtml(b.subject)}<br><span style="font-size:.82em;color:var(--muted)">${escHtml(b.topic)}</span></td>
+        <td>${statusTag}</td><td>${actions}</td></tr>`;
+    }
+    el.innerHTML = html + '</tbody></table>';
+  } catch(e) { if (e.message !== '__401__') el.innerHTML = '<div class="empty">Errore nel caricamento.</div>'; }
+}
+
+async function adminCancel(id) {
+  if (!confirm('Annullare questa prenotazione?')) return;
+  try { await api('PATCH', `/bookings/${id}`, { status: 'annullata' }); renderAdminBookings(); toast('Annullata.'); }
+  catch(e) { if (e.message !== '__401__') toast(e.message); }
+}
+async function adminRestore(id) {
+  try { await api('PATCH', `/bookings/${id}`, { status: 'confermata' }); renderAdminBookings(); toast('Ripristinata.'); }
+  catch(e) { if (e.message !== '__401__') toast(e.message); }
+}
+
+// ── Admin: students ───────────────────────────────────────────────
+async function renderAdminStudents() {
+  const el = document.getElementById('admin-students-list');
+  el.innerHTML = '<div class="empty">Caricamento...</div>';
+  try {
+    const users = await api('GET', '/students');
+    if (!users.length) { el.innerHTML = '<div class="empty">Nessuno studente registrato.</div>'; return; }
+    let html = '<table class="tbl"><thead><tr><th>Nome</th><th>Telefono</th><th>Lezioni attive</th><th>Registrato il</th></tr></thead><tbody>';
+    for (const u of users)
+      html += `<tr>
+        <td><strong>${escHtml(u.nome)} ${escHtml(u.cognome)}</strong></td>
+        <td><a href="tel:${escHtml(u.telefono)}" style="color:var(--primary)">${escHtml(u.telefono)}</a></td>
+        <td>${u.activeBookings}</td>
+        <td style="color:var(--muted);font-size:.83em">${new Date(u.createdAt).toLocaleDateString('it-IT')}</td></tr>`;
+    el.innerHTML = html + '</tbody></table>';
+  } catch(e) { if (e.message !== '__401__') el.innerHTML = '<div class="empty">Errore.</div>'; }
+}
+
+// ── Admin: slots ──────────────────────────────────────────────────
+async function renderAdminSlots() {
+  const tplEl = document.getElementById('tpl-list');
+  const excEl = document.getElementById('exc-list');
+  tplEl.innerHTML = excEl.innerHTML = '<div class="empty" style="padding:.7rem 0">Caricamento...</div>';
+  try {
+    const [tpl, exc] = await Promise.all([api('GET', '/template'), api('GET', '/exceptions')]);
+    tplEl.innerHTML = !tpl.length ? '<div class="empty" style="padding:.7rem 0">Nessun orario.</div>'
+      : [...tpl].sort((a,b) => a.dow-b.dow || a.time.localeCompare(b.time)).map(t =>
+          `<div class="row-sb" style="padding:.4rem 0;border-bottom:1px solid var(--border)">
+            <span>${DOW_FULL[t.dow]} &middot; <strong>${t.time}</strong></span>
+            <button class="btn btn-sm btn-danger" onclick="removeTpl(${t.dow},'${t.time}')">Rimuovi</button>
+          </div>`).join('');
+    excEl.innerHTML = !exc.length ? '<div class="empty" style="padding:.7rem 0">Nessuna eccezione.</div>'
+      : [...exc].sort((a,b) => a.date.localeCompare(b.date)).map(e => {
+          const typeTag = e.type === 'add' ? '<span class="tag tag-ok">+Aggiunto</span>' : '<span class="tag tag-err">&minus;Rimosso</span>';
+          return `<div class="row-sb" style="padding:.4rem 0;border-bottom:1px solid var(--border)">
+            <span>${fmtDate(e.date)} &middot; <strong>${e.time}</strong> ${typeTag}</span>
+            <button class="btn btn-sm btn-danger" onclick="removeExc('${e.date}','${e.time}','${e.type}')">Rimuovi</button>
+          </div>`;
+        }).join('');
+  } catch(e) { if (e.message !== '__401__') { tplEl.innerHTML = excEl.innerHTML = '<div class="empty">Errore.</div>'; } }
+}
+
+async function removeTpl(dow, time) {
+  try { await api('DELETE', '/template', { dow, time }); renderAdminSlots(); toast('Slot rimosso.'); }
+  catch(e) { if (e.message !== '__401__') toast(e.message); }
+}
+async function removeExc(date, time, type) {
+  try { await api('DELETE', '/exceptions', { date, time, type }); renderAdminSlots(); toast('Eccezione rimossa.'); }
+  catch(e) { if (e.message !== '__401__') toast(e.message); }
+}
+
+// ── Admin: tab switching ──────────────────────────────────────────
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+  document.getElementById(tabId).style.display = '';
+  document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+  if (tabId === 'tab-bookings')      renderAdminBookings();
+  else if (tabId === 'tab-slots')    renderAdminSlots();
+  else if (tabId === 'tab-students') renderAdminStudents();
+}
+
+// ── Bootstrap ─────────────────────────────────────────────────────
+function init() {
+  if (_session?.type === 'student') { show('s-student'); renderStudentDashboard(); }
+  else if (_session?.type === 'admin') { show('s-admin'); switchTab('tab-bookings'); }
+  else show('s-welcome');
+}
+
+// ── Events ────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+
+  document.getElementById('go-register').addEventListener('click', e => { e.preventDefault(); show('s-register'); });
+  document.getElementById('go-login').addEventListener('click', e => { e.preventDefault(); show('s-welcome'); });
+  document.getElementById('go-welcome').addEventListener('click', e => { e.preventDefault(); show('s-welcome'); });
+
+  document.getElementById('go-admin').addEventListener('click', async e => {
+    e.preventDefault();
+    try {
+      const { configured } = await fetch('/api/admin/status').then(r => r.json());
+      document.getElementById('admin-first-setup').style.display = configured ? 'none' : '';
+      document.getElementById('admin-login-form').style.display  = configured ? '' : 'none';
+    } catch {}
+    show('s-admin-login');
+  });
+
+  document.getElementById('btn-logout').addEventListener('click', () => { clearSession(); show('s-welcome'); });
+  document.getElementById('btn-admin-logout').addEventListener('click', () => { clearSession(); show('s-welcome'); });
+
+  // Login
+  async function doLogin() {
+    const telefono = document.getElementById('login-tel').value.trim();
+    const pw       = document.getElementById('login-pw').value;
+    if (!telefono || !pw) { toast('Compila tutti i campi.'); return; }
+    const btn = document.getElementById('btn-login');
+    btn.disabled = true;
+    try {
+      const { token, user } = await api('POST', '/login', { telefono, pw });
+      saveSession(token, { type: 'student', ...user });
+      show('s-student'); renderStudentDashboard();
+    } catch(e) { if (e.message !== '__401__') toast(e.message); }
+    finally { btn.disabled = false; }
+  }
+  document.getElementById('btn-login').addEventListener('click', doLogin);
+  document.getElementById('login-pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+  // Register
+  document.getElementById('btn-register').addEventListener('click', async () => {
+    const nome    = document.getElementById('reg-nome').value.trim();
+    const cognome = document.getElementById('reg-cognome').value.trim();
+    const tel     = document.getElementById('reg-tel').value.trim();
+    const pw      = document.getElementById('reg-pw').value;
+    const pw2     = document.getElementById('reg-pw2').value;
+    if (!nome || !cognome || !tel || !pw) { toast('Compila tutti i campi.'); return; }
+    if (pw !== pw2)    { toast('Le password non coincidono.'); return; }
+    if (pw.length < 6) { toast('Password troppo corta (min 6 caratteri).'); return; }
+    const btn = document.getElementById('btn-register');
+    btn.disabled = true;
+    try {
+      const { token, user } = await api('POST', '/register', { nome, cognome, telefono: tel, pw });
+      saveSession(token, { type: 'student', ...user });
+      show('s-student'); renderStudentDashboard();
+      toast(`Benvenuto, ${nome}!`);
+    } catch(e) { if (e.message !== '__401__') toast(e.message); }
+    finally { btn.disabled = false; }
+  });
+
+  // Booking
+  document.getElementById('btn-new-booking').addEventListener('click', () => { show('s-book'); renderBooking(); });
+  document.getElementById('btn-back-student').addEventListener('click', () => { show('s-student'); renderStudentDashboard(); });
+  document.getElementById('recurring-range').addEventListener('input', fetchRecurringPreview);
+  document.getElementById('btn-confirm-booking').addEventListener('click', confirmBooking);
+
+  // Admin setup
+  document.getElementById('btn-admin-setup').addEventListener('click', async () => {
+    const pw = document.getElementById('admin-setup-pw').value;
+    const pw2 = document.getElementById('admin-setup-pw2').value;
+    if (!pw) { toast('Inserisci una password.'); return; }
+    if (pw !== pw2) { toast('Le password non coincidono.'); return; }
+    if (pw.length < 6) { toast('Password troppo corta.'); return; }
+    try {
+      const { token } = await api('POST', '/admin/setup', { pw });
+      saveSession(token, { type: 'admin' });
+      show('s-admin'); switchTab('tab-bookings');
+      toast('Password impostata. Benvenuto!');
+    } catch(e) { if (e.message !== '__401__') toast(e.message); }
+  });
+
+  // Admin login
+  async function doAdminLogin() {
+    const pw  = document.getElementById('admin-pw-input').value;
+    const btn = document.getElementById('btn-admin-login');
+    btn.disabled = true;
+    try {
+      const { token } = await api('POST', '/admin/login', { pw });
+      saveSession(token, { type: 'admin' });
+      document.getElementById('admin-pw-input').value = '';
+      show('s-admin'); switchTab('tab-bookings');
+    } catch(e) { if (e.message !== '__401__') toast(e.message); }
+    finally { btn.disabled = false; }
+  }
+  document.getElementById('btn-admin-login').addEventListener('click', doAdminLogin);
+  document.getElementById('admin-pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') doAdminLogin(); });
+
+  // Admin tabs
+  document.querySelectorAll('[data-tab]').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+  // Slots
+  document.getElementById('btn-add-tpl').addEventListener('click', async () => {
+    const dow  = parseInt(document.getElementById('tpl-day').value);
+    const time = document.getElementById('tpl-time').value;
+    if (!time) { toast('Seleziona un orario.'); return; }
+    try { await api('POST', '/template', { dow, time }); renderAdminSlots(); toast('Slot aggiunto.'); }
+    catch(e) { if (e.message !== '__401__') toast(e.message); }
+  });
+  document.getElementById('btn-add-exc').addEventListener('click', async () => {
+    const date = document.getElementById('exc-date').value;
+    const time = document.getElementById('exc-time').value;
+    const type = document.getElementById('exc-type').value;
+    if (!date || !time) { toast('Inserisci data e ora.'); return; }
+    try { await api('POST', '/exceptions', { date, time, type }); renderAdminSlots(); toast('Eccezione aggiunta.'); }
+    catch(e) { if (e.message !== '__401__') toast(e.message); }
+  });
+  document.getElementById('filter-status').addEventListener('change', renderAdminBookings);
+
+  // Change admin password
+  document.getElementById('btn-change-admin-pw').addEventListener('click', async () => {
+    const pw  = document.getElementById('new-admin-pw').value;
+    const pw2 = document.getElementById('new-admin-pw2').value;
+    if (!pw) { toast('Inserisci la nuova password.'); return; }
+    if (pw !== pw2) { toast('Le password non coincidono.'); return; }
+    if (pw.length < 6) { toast('Password troppo corta.'); return; }
+    try {
+      await api('PUT', '/admin/password', { pw });
+      document.getElementById('new-admin-pw').value = document.getElementById('new-admin-pw2').value = '';
+      toast('Password aggiornata.');
+    } catch(e) { if (e.message !== '__401__') toast(e.message); }
+  });
+});
+</script>
+</body>
+</html>
