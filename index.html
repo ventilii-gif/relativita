@@ -360,7 +360,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
   <div class="sec-head">
     <div class="kicker">Prima di cominciare</div>
     <h1>Quando il senso comune non basta più</h1>
-    <p class="lead">Un percorso in quattro tappe attraverso la relatività di Einstein: teoria, simulazioni con cui giocare, esercizi guidati e quiz. Con una premessa importante.</p>
+    <p class="lead">Un percorso in cinque tappe attraverso la relatività di Einstein: teoria, simulazioni con cui giocare, esercizi guidati e quiz. Con una premessa importante.</p>
   </div>
 
   <div class="card">
@@ -375,7 +375,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
 
   <div class="card">
     <h2>Come è organizzato il percorso</h2>
-    <p>Quattro sezioni, ciascuna con la stessa struttura: <strong>Teoria</strong> (spiegazioni e formule), <strong>Simulazioni</strong> (grafica interattiva da manipolare con i cursori), <strong>Esercizi guidati</strong> (con suggerimenti progressivi) e <strong>Quiz</strong> (10 domande di teoria e 5 problemi numerici, con correzione immediata). Alla fine c'è un quiz conclusivo di riepilogo, con punteggio rivelato solo alla consegna.</p>
+    <p>Cinque sezioni, ciascuna con la stessa struttura: <strong>Teoria</strong> (spiegazioni e formule), <strong>Simulazioni</strong> (grafica interattiva da manipolare con i cursori), <strong>Esercizi guidati</strong> (con suggerimenti progressivi) e <strong>Quiz</strong> (10 domande di teoria e 5 problemi numerici, con correzione immediata). Alla fine c'è un quiz conclusivo di riepilogo, con punteggio rivelato solo alla consegna.</p>
     <div class="home-grid" id="homeCards"></div>
     <div class="note teal">
       <b class="tag">Suggerimento di metodo</b>
@@ -1088,7 +1088,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
   <div class="sec-head">
     <div class="kicker">Sezione 4</div>
     <h1>Spazio di Minkowski</h1>
-    <p class="lead">La geometria dello spaziotempo: diagrammi, cono di luce, paradosso dei gemelli. E poi il passo successivo — quando lo spaziotempo si incurva e nasce la relatività generale.</p>
+    <p class="lead">La geometria dello spaziotempo piatto: diagrammi, linee di universo, cono di luce, paradosso dei gemelli e rapidità. Tutta la relatività ristretta letta come una geometria.</p>
   </div>
 
   <div class="tabs" role="tablist">
@@ -1192,57 +1192,24 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
     </div>
 
     <div class="card">
-      <h2>4.4 Verso la relatività generale: il principio di equivalenza</h2>
-      <p>La relatività ristretta ha un limite dichiarato nel nome: vale solo per sistemi <em>inerziali</em>, e non dice nulla sulla gravità. Anzi, con la gravità newtoniana è incompatibile, perché quella agisce istantaneamente a distanza — e nulla può propagarsi più veloce di c.</p>
-      <p>Nel 1907 Einstein ebbe quello che chiamò "il pensiero più felice della mia vita": <em>una persona in caduta libera non sente il proprio peso</em>. Da qui il <strong>principio di equivalenza</strong>:</p>
-      <div class="note">
-        <b class="tag">Principio di equivalenza</b>
-        In una regione sufficientemente piccola dello spazio e del tempo, <strong>un campo gravitazionale uniforme è indistinguibile da un'accelerazione</strong>. Nessun esperimento condotto dentro un ascensore chiuso permette di dire se l'ascensore è fermo sulla Terra o se sta accelerando a 9,8 m/s² nello spazio profondo.
-      </div>
-      <p>Alla radice c'è un fatto sperimentale noto da Galileo e verificato oggi con precisione di parti su 10¹⁵: <strong>massa inerziale e massa gravitazionale coincidono</strong>. Nella meccanica newtoniana è una coincidenza inspiegata (perché mai la "resistenza al moto" dovrebbe essere uguale alla "carica gravitazionale"?). In relatività generale non è una coincidenza: è il punto di partenza. La gravità non è una forza che agisce sui corpi, è la <strong>geometria in cui i corpi si muovono liberamente</strong>.</p>
-      <p>Se l'accelerazione e la gravità sono localmente la stessa cosa, allora tutto ciò che l'accelerazione fa allo spazio e al tempo, lo fa anche la gravità. E l'accelerazione, in relatività ristretta, deforma il modo in cui si sincronizzano gli orologi e si misurano le distanze.</p>
-    </div>
-
-    <div class="card">
-      <h2>4.5 Spaziotempo curvo</h2>
-      <p>La formulazione del 1915 sostituisce la forza di gravità con la curvatura: la materia e l'energia deformano lo spaziotempo, e i corpi liberi seguono le <strong>geodetiche</strong>, cioè le "linee più dritte possibili" nella geometria curva. La sintesi di John Wheeler:</p>
+      <h2>4.4 La rapidità: la variabile che si somma</h2>
+      <p>C'è un modo elegante di riassumere tutta la sezione. Definiamo la <strong>rapidità</strong> \(\varphi\) di un sistema tramite</p>
+      <div class="formula key">\[ \tanh\varphi = \beta, \qquad \cosh\varphi = \gamma, \qquad \sinh\varphi = \beta\gamma \]</div>
+      <p>Con questa variabile la trasformazione di Lorentz assume la forma di una rotazione, con le funzioni iperboliche al posto di seno e coseno:</p>
+      <div class="formula">\[ ct' = ct\,\cosh\varphi - x\,\sinh\varphi, \qquad x' = x\,\cosh\varphi - ct\,\sinh\varphi \]</div>
+      <p>e soprattutto le rapidità <strong>si sommano</strong>: componendo due boost successivi si ottiene \(\varphi = \varphi_1 + \varphi_2\). La formula relativistica di composizione delle velocità, che sembrava arbitraria, non è altro che la formula di addizione della tangente iperbolica riscritta in termini di \(\beta\).</p>
+      <p>Questo chiarisce anche perché c non si raggiunge: \(\beta = \tanh\varphi\) tende a 1 solo per \(\varphi \to \infty\). Si può accumulare rapidità quanto si vuole — è lei la quantità che "si somma" come nell'intuizione galileiana — ma la velocità corrispondente resta sempre al di sotto di c.</p>
       <div class="note calm">
-        <b class="tag">In una frase</b>
-        <em>La materia dice allo spaziotempo come curvarsi; lo spaziotempo dice alla materia come muoversi.</em>
-      </div>
-      <p>La Terra non gira attorno al Sole perché una fune invisibile la tiri: gira perché sta seguendo la traiettoria più naturale possibile in uno spaziotempo che il Sole ha incurvato. Non c'è forza: c'è geometria. E l'equazione di campo di Einstein (che al liceo si guarda, non si usa) lega la curvatura al contenuto di energia e materia.</p>
-      <div class="note warm">
-        <b class="tag">L'analogia del telo elastico: utile ma zoppa</b>
-        L'immagine della palla pesante che deforma un telo, con biglie che le girano attorno, è la più diffusa e la usiamo anche nella simulazione. Va però usata sapendo dove tradisce: (1) rappresenta solo due dimensioni spaziali, mentre la parte più importante della curvatura riguarda il <em>tempo</em> — per un sasso che cade, quasi tutto l'effetto viene dalla curvatura temporale; (2) usa la gravità terrestre per spiegare la gravità, il che è circolare; (3) l'incurvamento non è "verso il basso" in una direzione esterna: lo spaziotempo si curva su sé stesso, senza bisogno di uno spazio in cui immergersi. Tienila come sostegno visivo, non come spiegazione.
+        <b class="tag">Il punto d'arrivo di questa sezione</b>
+        Lo spaziotempo di Minkowski è <em>piatto</em>: gli assi si inclinano, ma le linee restano rette e il cono di luce è lo stesso ovunque. È la geometria della relatività ristretta, e vale in assenza di gravità. Che cosa succede quando c'è una massa nei paraggi è l'argomento della sezione successiva: il cono di luce comincia a inclinarsi da punto a punto e la geometria diventa curva.
       </div>
     </div>
 
-    <div class="card">
-      <h2>4.6 Quattro previsioni verificate</h2>
-      <h3>Deflessione della luce</h3>
-      <p>Se la luce segue le geodetiche di uno spaziotempo curvo, un raggio che sfiora il Sole viene deviato. La previsione di Einstein è \(1{,}75''\) di arco, esattamente il doppio di quanto si otterrebbe con un calcolo newtoniano ingenuo (il fattore 2 viene dal contributo della curvatura spaziale). Il 29 maggio 1919 la spedizione di Arthur Eddington fotografò le stelle vicine al bordo solare durante un'eclissi totale e confermò il valore: fu la notizia che rese Einstein celebre in tutto il mondo. Oggi lo stesso effetto si osserva su scala enorme nelle <strong>lenti gravitazionali</strong>: galassie lontane appaiono sdoppiate, deformate in archi o in anelli di Einstein.</p>
-      <h3>Dilatazione gravitazionale del tempo</h3>
-      <p>Un orologio in un campo gravitazionale più intenso batte più lentamente. Per una massa sferica di massa \(M\), a distanza \(r\) dal centro:</p>
-      <div class="formula key">\[ \Delta\tau = \Delta t\,\sqrt{1 - \frac{2GM}{r c^{2}}} \]</div>
-      <p>dove \(\Delta t\) è il tempo misurato lontano dalla massa. Sulla superficie terrestre l'effetto è minuscolo ma misurato: nel 1959 l'esperimento di <strong>Pound e Rebka</strong> lo rivelò su un dislivello di 22,5 m usando l'effetto Mössbauer. Oggi gli orologi ottici distinguono un dislivello di pochi centimetri.</p>
-      <div class="note teal">
-        <b class="tag">Il GPS: relatività che ti sta in tasca</b>
-        I satelliti GPS orbitano a 20 200 km a circa 3,9 km/s. Due effetti opposti agiscono sui loro orologi: la <em>velocità</em> li rallenta di circa 7 μs al giorno (relatività ristretta), il <em>minore campo gravitazionale</em> li accelera di circa 45 μs al giorno (relatività generale). Netto: +38 μs al giorno. Senza correggerli, l'errore di posizione crescerebbe di circa 10 km al giorno e la navigazione satellitare sarebbe inutilizzabile in poche ore. Gli orologi dei satelliti sono tarati a terra con una frequenza leggermente diversa, proprio per compensare.
-      </div>
-      <h3>Buchi neri</h3>
-      <p>Se una massa è compressa entro un raggio critico, la curvatura diventa tale che nemmeno la luce può uscire. Il raggio è quello di <strong>Schwarzschild</strong>:</p>
-      <div class="formula key">\[ r_s = \frac{2GM}{c^{2}} \]</div>
-      <p>Per il Sole varrebbe 3 km, per la Terra 9 mm. La superficie sferica di raggio \(r_s\) è l'<strong>orizzonte degli eventi</strong>: non è un muro materiale, è un confine causale, il punto di non ritorno. Visto da lontano, un orologio che vi si avvicina rallenta sempre di più e sembra congelarsi sull'orizzonte, mentre per chi cade l'attraversamento avviene in un tempo proprio finito. Nel 2019 la collaborazione Event Horizon Telescope ha pubblicato la prima immagine dell'ombra di un buco nero, quello al centro di M87; nel 2022 quella di Sagittarius A*, al centro della nostra galassia.</p>
-      <h3>Onde gravitazionali</h3>
-      <p>Se lo spaziotempo è un'entità dinamica, può oscillare: masse accelerate emettono <strong>onde gravitazionali</strong>, increspature della geometria che si propagano a velocità c. Sono debolissime — l'onda che ci raggiunge deforma le distanze di una parte su 10²¹ — ma il 14 settembre 2015 gli interferometri LIGO hanno rivelato il segnale <strong>GW150914</strong>, prodotto dalla fusione di due buchi neri di circa 30 masse solari a 1,3 miliardi di anni luce. In quella fusione, circa 3 masse solari sono state convertite in energia gravitazionale in una frazione di secondo: E = mc² su scala cosmica. Da allora se ne contano centinaia, e con Virgo in Italia l'astronomia gravitazionale è diventata osservazione di routine.</p>
-      <p>Cento anni dopo, tutte le previsioni della relatività generale che siamo stati in grado di verificare hanno superato la prova. Resta il fatto che la teoria e la meccanica quantistica non sono ancora state conciliate: è il problema aperto più importante della fisica teorica. La relatività non chiude il discorso, lo sposta più avanti.</p>
-    </div>
-
-    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="finale">Quiz finale →</button></div>
+    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="generale">Relatività generale →</button></div>
   </div>
 
   <div class="pane" data-pane="sim">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">Tre simulazioni: il diagramma di Minkowski da manipolare, lo spaziotempo che si incurva attorno a una massa, e gli orologi vicino a un buco nero.</p>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">Due simulazioni: il diagramma di Minkowski da manipolare e il paradosso dei gemelli disegnato mentre accade.</p>
 
     <div class="sim">
       <h3>Diagramma di Minkowski interattivo</h3>
@@ -1262,6 +1229,239 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
       </div>
       <div class="readouts" id="mk-table"></div>
       <p class="simnote">Osserva due cose. Primo: le rette a 45° non si muovono mai, qualunque sia β — è il secondo postulato. Secondo: eventi che stanno sulla stessa orizzontale (simultanei in S) non stanno sulla stessa retta parallela a x′ (non sono simultanei in S′).</p>
+    </div>
+
+    <div class="sim">
+      <h3>Il paradosso dei gemelli, disegnato mentre accade</h3>
+      <p style="font-size:.94rem;color:var(--text-2)">Il gemello A resta fermo (linea verticale), il gemello B parte, arriva alla stella e torna. La linea tratteggiata è ciò che B chiama "adesso" a casa: guarda che cosa le succede nell'istante dell'inversione.</p>
+      <div class="cvwrap"><canvas data-sim="twins" width="900" height="620"></canvas></div>
+      <div class="ctrls">
+        <div class="ctrl">
+          <label for="tw-beta">Velocità del gemello B, β = v/c <span class="val" id="tw-beta-v">0,80</span></label>
+          <input type="range" id="tw-beta" min="0.2" max="0.95" step="0.01" value="0.8">
+        </div>
+      </div>
+      <div class="readouts">
+        <div class="ro"><span class="k">γ</span><span class="v" id="tw-g">1,667</span></div>
+        <div class="ro t2"><span class="k">A (resta a casa)</span><span class="v" id="tw-a">0,0 a</span></div>
+        <div class="ro t3"><span class="k">B (viaggia)</span><span class="v" id="tw-b">0,0 a</span></div>
+        <div class="ro"><span class="k">Differenza finale</span><span class="v" id="tw-d">3,2 a</span></div>
+      </div>
+      <div class="btnrow">
+        <button class="btn primary" data-act="twins-play">Pausa</button>
+        <button class="btn" data-act="twins-reset">Ricomincia il viaggio</button>
+      </div>
+      <p class="simnote">Il viaggio dura sempre 8 anni di tempo coordinato: al variare di β cambia la distanza della stella (D = 4β anni luce). All'inversione la retta di simultaneità di B ruota di colpo e "salta" in avanti di β²·T anni sulla linea di A: è qui che si rompe la simmetria fra i due gemelli, e per questo B torna più giovane.</p>
+    </div>
+
+    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="generale">Relatività generale →</button></div>
+  </div>
+
+  <div class="pane" data-pane="ese">
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">Cinque problemi su diagrammi, trasformazioni di coordinate e tempo proprio lungo le linee di universo.</p>
+    <div data-ex="minkowski"></div>
+    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="generale">Relatività generale →</button></div>
+  </div>
+
+  <div class="pane" data-pane="quiz">
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sullo spazio di Minkowski, con correzione immediata.</p>
+    <div data-quiz="minkowski"></div>
+    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="generale">Relatività generale →</button></div>
+  </div>
+</section>
+
+<!-- ==================== 5. RELATIVITÀ GENERALE ==================== -->
+<section class="sec" id="sec-generale" data-title="Relatività generale">
+  <div class="sec-head">
+    <div class="kicker">Sezione 5</div>
+    <h1>Relatività generale</h1>
+    <p class="lead">Dal principio di equivalenza allo spaziotempo curvo: la gravità smette di essere una forza e diventa geometria. Trattazione concettuale, senza formalismo tensoriale.</p>
+  </div>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-pane="teoria">Teoria</button>
+    <button role="tab" aria-selected="false" data-pane="sim">Simulazioni</button>
+    <button role="tab" aria-selected="false" data-pane="ese">Esercizi guidati</button>
+    <button role="tab" aria-selected="false" data-pane="quiz">Quiz</button>
+  </div>
+
+  <div class="pane on" data-pane="teoria">
+
+    <div class="card">
+      <h2>5.1 Perché la relatività ristretta non bastava</h2>
+      <p>La teoria del 1905 ha due limiti dichiarati, e Einstein li conosceva bene.</p>
+      <ol>
+        <li><strong>Vale solo per sistemi inerziali.</strong> Il primo postulato mette sullo stesso piano tutti gli osservatori in moto rettilineo uniforme, ma lascia fuori chi accelera. È una restrizione poco soddisfacente: perché l'universo dovrebbe avere una classe privilegiata di osservatori?</li>
+        <li><strong>È incompatibile con la gravità di Newton.</strong> Nella legge \(F = G m_1 m_2 / r^2\) la distanza \(r\) è quella <em>attuale</em>: se il Sole scomparisse, secondo Newton la Terra devierebbe all'istante. Ma "all'istante" è una parola priva di senso in relatività — la simultaneità dipende dall'osservatore — e in ogni caso nessuna informazione può viaggiare più veloce di c.</li>
+      </ol>
+      <p>Servono dunque una teoria che valga per <em>tutti</em> gli osservatori e una descrizione della gravità che si propaghi a velocità finita. Einstein ci mise dieci anni: la relatività generale è del novembre 1915.</p>
+      <div class="note calm">
+        <b class="tag">Che cosa aspettarsi da questa sezione</b>
+        Qui la matematica vera (il calcolo tensoriale, l'equazione di campo) resta fuori portata del liceo, e va bene così: le idee fisiche si possono capire tutte senza. Il prezzo è che alcune affermazioni andranno accettate come risultati, non dimostrate. Lo diciamo esplicitamente ogni volta che succede, perché la differenza fra "l'ho capito" e "me l'hanno detto" è importante e va tenuta chiara.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5.2 Il principio di equivalenza</h2>
+      <p>Nel 1907, mentre lavorava all'ufficio brevetti di Berna, Einstein ebbe quello che chiamò <em>"il pensiero più felice della mia vita"</em>: una persona in caduta libera non sente il proprio peso. Chi cade non ha modo di accorgersi che esiste un campo gravitazionale: tutto attorno a lui cade insieme a lui.</p>
+      <div class="note">
+        <b class="tag">Principio di equivalenza</b>
+        In una regione sufficientemente piccola dello spazio e del tempo, <strong>un campo gravitazionale uniforme è indistinguibile da un'accelerazione</strong>. Nessun esperimento condotto dentro una cabina chiusa permette di stabilire se essa è ferma sulla superficie terrestre o se sta accelerando a 9,8 m/s² nello spazio profondo, lontano da ogni massa.
+      </div>
+      <p>Alla radice c'è un fatto sperimentale noto fin da Galileo: <strong>tutti i corpi cadono con la stessa accelerazione</strong>, indipendentemente da massa e composizione. In linguaggio newtoniano significa che la massa che compare in \(F = ma\) (inerziale) e quella che compare nella legge di gravitazione (gravitazionale) coincidono:</p>
+      <div class="formula key">\[ m_{\text{inerziale}} = m_{\text{gravitazionale}} \]</div>
+      <p>Nella meccanica di Newton questa uguaglianza è una <em>coincidenza inspiegata</em>: nulla, nella teoria, impone che la resistenza al moto e la "carica gravitazionale" siano la stessa grandezza. Eppure è verificata con precisione straordinaria — dagli esperimenti di Eötvös a inizio Novecento fino alla missione spaziale MICROSCOPE, che nel 2022 l'ha confermata a una parte su 10<sup>15</sup>. Einstein prese sul serio quella coincidenza e ne fece il fondamento della teoria.</p>
+      <div class="note warm">
+        <b class="tag">La clausola più importante: "in una regione sufficientemente piccola"</b>
+        L'equivalenza è <strong>locale</strong>. In una cabina abbastanza grande la differenza si vede: due biglie lasciate cadere ai due lati di una stanza sulla Terra convergono lentamente l'una verso l'altra, perché puntano entrambe al centro del pianeta, mentre in un razzo accelerato resterebbero parallele. Sono le <strong>forze di marea</strong>, e non si possono eliminare cambiando riferimento. Proprio per questo la gravità non è "solo" un effetto di accelerazione: le maree sono la firma della vera curvatura.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5.3 Che cosa segue subito dal principio di equivalenza</h2>
+      <p>Il bello è che dal solo principio di equivalenza, senza alcuna matematica avanzata, si ricavano già due previsioni che la fisica di Newton non contempla.</p>
+
+      <h3>La luce viene deviata dalla gravità</h3>
+      <p>Immagina un raggio di luce che attraversa orizzontalmente una cabina in accelerazione. Nel tempo che la luce impiega a percorrere la larghezza della cabina, la cabina si è spostata verso l'alto: rispetto alle sue pareti, il raggio arriva un po' più in basso di dove era entrato. Per chi sta dentro, <strong>il raggio è curvo</strong>. Ma per il principio di equivalenza la stessa cosa deve accadere in una cabina ferma in un campo gravitazionale. Dunque <em>la gravità curva i raggi di luce</em>, anche se i fotoni non hanno massa.</p>
+
+      <h3>Gli orologi in basso rallentano</h3>
+      <p>Nella stessa cabina accelerata, un segnale luminoso emesso dal pavimento verso il soffitto arriva a un rivelatore che nel frattempo si è messo in moto <em>allontanandosi</em> dalla sorgente: per effetto Doppler la frequenza ricevuta è minore. Traducendo con il principio di equivalenza: <strong>la luce che sale in un campo gravitazionale si arrossa</strong> (redshift gravitazionale), e poiché la frequenza di un'onda è un orologio, ne segue che un orologio in basso batte più lentamente di uno in alto. Per dislivelli piccoli:</p>
+      <div class="formula key">\[ \frac{\Delta \nu}{\nu} \approx -\frac{g\,h}{c^{2}} \qquad\Longleftrightarrow\qquad \frac{\Delta \tau}{\tau} \approx \frac{g\,h}{c^{2}} \]</div>
+      <p>Sulla Terra, per \(h = 1\) m, il rapporto vale circa 10<sup>−16</sup>: un orologio al piano terra perde un secondo ogni 300 milioni di anni rispetto a uno al primo piano. Piccolo, ma oggi si misura in laboratorio.</p>
+      <div class="note teal">
+        <b class="tag">Perché queste due conseguenze sono decisive</b>
+        Se la luce viene deviata e gli orologi vanno a ritmi diversi da punto a punto, allora <em>non esiste</em> un modo coerente di ricoprire tutto lo spaziotempo con un unico reticolo di regoli rigidi e orologi sincronizzati, come si fa in relatività ristretta. La geometria piatta di Minkowski vale solo localmente, in ogni piccola regione. Cucire insieme tutte queste piccole regioni piatte dà una superficie curva: è esattamente ciò che accade quando si ricopre la Terra con tante mappe piane.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5.4 Lo spaziotempo curvo</h2>
+      <p>La svolta concettuale del 1915 è togliere alla gravità lo status di forza. Nella relatività generale un corpo che "cade" non è soggetto ad alcuna forza: si muove lungo una <strong>geodetica</strong>, cioè la linea più dritta possibile in uno spaziotempo che le masse hanno incurvato. Se percepiamo un peso, è perché il pavimento ci <em>impedisce</em> di seguire la nostra geodetica.</p>
+      <div class="note calm">
+        <b class="tag">La sintesi di John Wheeler</b>
+        <em>La materia dice allo spaziotempo come curvarsi; lo spaziotempo dice alla materia come muoversi.</em>
+      </div>
+      <p>Il contenuto matematico sta nell'equazione di campo di Einstein, che scriviamo solo per guardarla:</p>
+      <div class="formula">\[ G_{\mu\nu} = \frac{8\pi G}{c^{4}}\, T_{\mu\nu} \]</div>
+      <p>A sinistra c'è la geometria (curvatura), a destra il contenuto di energia, materia e pressione. Non serve saperla usare: basta cogliere la struttura, cioè che geometria e materia sono legate da un'unica uguaglianza. Le orbite dei pianeti, la caduta di un sasso e l'espansione dell'universo sono tutte soluzioni della stessa equazione.</p>
+
+      <h3>Curvatura del tempo, prima ancora che dello spazio</h3>
+      <p>Un punto che le immagini divulgative nascondono quasi sempre: per un sasso che cade, l'effetto dominante non è la curvatura dello <em>spazio</em>, ma quella del <strong>tempo</strong>. Poiché gli orologi in basso rallentano, la traiettoria che massimizza il tempo proprio — la geodetica — è quella che "indugia" dove il tempo scorre più lentamente, cioè più in basso. Il sasso cade perché così invecchia di più. Alle velocità ordinarie, la curvatura spaziale contribuisce in modo del tutto trascurabile; conta invece per la luce, ed è la ragione del famoso fattore 2 nella deflessione.</p>
+      <div class="note warm">
+        <b class="tag">L'analogia del telo elastico: utile ma zoppa</b>
+        L'immagine della palla pesante che deforma un telo, con biglie che le girano attorno, è la più diffusa e la usiamo anche nella simulazione. Va però usata sapendo dove tradisce: (1) rappresenta due sole dimensioni spaziali e ignora proprio la curvatura del tempo, che è quella dominante; (2) usa la gravità terrestre (la palla che "pesa" sul telo) per spiegare la gravità, il che è circolare; (3) suggerisce che lo spaziotempo si incurvi "verso il basso", dentro uno spazio esterno, mentre la curvatura è intrinseca e non ha bisogno di alcuna dimensione in più in cui immergersi. Tienila come sostegno visivo, non come spiegazione.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5.5 Dilatazione gravitazionale del tempo</h2>
+      <p>Attorno a una massa sferica non rotante, la soluzione esatta dell'equazione di campo fu trovata da Karl Schwarzschild già nel 1916, mentre si trovava al fronte. Ne discende che un orologio fermo a distanza \(r\) dal centro batte più lentamente di uno posto a grande distanza, secondo</p>
+      <div class="formula key">\[ \Delta\tau = \Delta t \sqrt{1 - \frac{2GM}{r c^{2}}} = \Delta t \sqrt{1 - \frac{r_s}{r}} \]</div>
+      <p>dove \(\Delta t\) è il tempo misurato lontano dalla massa e \(r_s = 2GM/c^2\) è il raggio di Schwarzschild. Per campi deboli (\(r_s \ll r\)) la formula si riduce all'approssimazione del paragrafo precedente.</p>
+      <h3>Le verifiche</h3>
+      <ul>
+        <li><strong>Pound e Rebka, 1959.</strong> Alla torre di Harvard, su un dislivello di 22,5 m, misurarono uno spostamento di frequenza di circa 2,5 × 10<sup>−15</sup>, in accordo con \(gh/c^2\). Fu possibile grazie all'effetto Mössbauer, che fornisce righe gamma di larghezza estremamente ridotta.</li>
+        <li><strong>Hafele e Keating, 1971.</strong> Orologi atomici a bordo di voli di linea attorno al mondo tornarono sfasati di alcune centinaia di nanosecondi rispetto a quelli rimasti a terra, con contributi sia di relatività ristretta (velocità) sia generale (quota).</li>
+        <li><strong>Orologi ottici, oggi.</strong> La sensibilità è tale da rivelare la differenza fra due orologi separati da pochi centimetri di dislivello: la dilatazione gravitazionale del tempo è diventata uno strumento di geodesia.</li>
+      </ul>
+      <div class="note teal">
+        <b class="tag">Il GPS: relatività che ti sta in tasca</b>
+        I satelliti GPS orbitano a 20 200 km di quota a circa 3,9 km/s. Sui loro orologi agiscono due effetti di segno opposto: la <em>velocità</em> li rallenta di circa 7 μs al giorno (relatività ristretta), il <em>campo gravitazionale più debole</em> li fa correre più in fretta di circa 45 μs al giorno (relatività generale). Il saldo è +38 μs al giorno. Poiché la posizione si ricava da tempi di volo di segnali radio, un errore di 38 μs equivale a circa 11 km di errore al giorno: senza correzioni la navigazione satellitare sarebbe inservibile in poche ore. Gli orologi dei satelliti vengono tarati a terra su una frequenza leggermente diversa, proprio per compensare.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5.6 Le verifiche classiche</h2>
+
+      <h3>La precessione del perielio di Mercurio</h3>
+      <p>L'orbita di Mercurio non si chiude: il suo perielio avanza di circa 574 secondi d'arco per secolo. Quasi tutto si spiega con le perturbazioni degli altri pianeti, ma restavano <strong>43 secondi d'arco per secolo</strong> inspiegati — al punto che si era ipotizzato un pianeta sconosciuto, Vulcano, mai trovato. Nel novembre 1915 Einstein calcolò l'effetto con la sua nuova teoria e ottenne esattamente 43. Raccontò di avere avuto per giorni "palpitazioni al cuore": era la prima volta che la teoria spiegava un fatto già noto senza alcun parametro aggiustabile.</p>
+
+      <h3>La deflessione della luce</h3>
+      <p>Un raggio che sfiora il bordo del Sole viene deviato di</p>
+      <div class="formula">\[ \theta = \frac{4GM}{c^{2}R} \approx 1{,}75'' \]</div>
+      <p>cioè il <strong>doppio</strong> del valore che si otterrebbe trattando la luce come un proiettile newtoniano: metà viene dalla curvatura del tempo, metà da quella dello spazio, e il fattore 2 è quindi una firma specifica della relatività generale. Il 29 maggio 1919 la spedizione di Arthur Eddington fotografò durante un'eclissi totale le stelle vicine al bordo solare e confermò la previsione. La notizia fece il giro del mondo e rese Einstein una celebrità.</p>
+
+      <figure class="diagram">
+        <svg viewBox="0 0 560 215" role="img" aria-label="Deflessione della luce di una stella da parte del Sole">
+          <circle cx="245" cy="150" r="32" fill="var(--warm)" opacity=".25"/>
+          <circle cx="245" cy="150" r="20" fill="var(--warm)"/>
+          <text x="245" y="196" font-size="10.5" text-anchor="middle" fill="var(--muted)">Sole</text>
+          <line x1="55" y1="180" x2="430" y2="40" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/>
+          <line x1="55" y1="180" x2="430" y2="14" stroke="var(--acc)" stroke-width="1.6" stroke-dasharray="6 4"/>
+          <path d="M430 40 L245 96 L55 180" fill="none" stroke="var(--teal)" stroke-width="2.2"/>
+          <line x1="330" y1="62" x2="330" y2="82" stroke="var(--muted)" stroke-width="1"/>
+          <text x="337" y="97" font-size="10.5" fill="var(--muted)">θ ≈ 1,75″</text>
+          <circle cx="430" cy="40" r="4.5" fill="var(--text)"/>
+          <text x="442" y="44" font-size="10" fill="var(--text)">stella: posizione vera</text>
+          <circle cx="430" cy="14" r="4.5" fill="var(--acc)"/>
+          <text x="442" y="18" font-size="10" fill="var(--acc)">posizione apparente</text>
+          <circle cx="55" cy="180" r="5" fill="var(--teal)"/>
+          <text x="55" y="201" font-size="10" text-anchor="middle" fill="var(--teal)">Terra</text>
+          <text x="70" y="152" font-size="10" fill="var(--teal)">percorso reale della luce</text>
+        </svg>
+        <figcaption>Il raggio proveniente dalla stella viene incurvato dal Sole: la stella appare spostata rispetto alla posizione che occupa realmente. Durante un'eclissi la si può fotografare e confrontare con la mappa notturna.</figcaption>
+      </figure>
+
+      <p>Lo stesso fenomeno, su scala cosmica, produce le <strong>lenti gravitazionali</strong>: ammassi di galassie che deformano l'immagine di galassie più lontane in archi, immagini multiple o anelli di Einstein. Oggi è uno strumento ordinario di lavoro, usato anche per pesare la materia oscura.</p>
+
+      <h3>Il ritardo di Shapiro</h3>
+      <p>Un segnale radio che passa vicino al Sole impiega qualche centinaio di microsecondi in più del previsto per andare e tornare da una sonda: non perché rallenti — localmente la luce viaggia sempre a c — ma perché il percorso attraversa una regione in cui la geometria è deformata. Misurato per la prima volta nel 1966 e verificato oggi con precisione di una parte su 10<sup>5</sup> grazie alla sonda Cassini.</p>
+    </div>
+
+    <div class="card">
+      <h2>5.7 Buchi neri</h2>
+      <p>Se una massa viene compressa entro il proprio raggio di Schwarzschild, la curvatura diventa tale che nessun segnale può più uscire:</p>
+      <div class="formula key">\[ r_s = \frac{2GM}{c^{2}} \]</div>
+      <p>Per il Sole varrebbe circa 3 km, per la Terra 9 mm. La sfera di raggio \(r_s\) è l'<strong>orizzonte degli eventi</strong>: non è una superficie materiale né un muro che si possa toccare, ma un <em>confine causale</em>, la frontiera oltre la quale tutti i coni di luce sono inclinati verso l'interno e ogni futuro possibile porta al centro.</p>
+      <p>Due punti di vista, entrambi corretti:</p>
+      <ul>
+        <li><strong>Chi guarda da lontano</strong> vede l'orologio di una sonda in caduta rallentare sempre di più e la sua luce arrossarsi e affievolirsi, fino a congelarsi apparentemente sull'orizzonte, che non viene mai raggiunto.</li>
+        <li><strong>Chi cade</strong> attraversa l'orizzonte in un tempo proprio finito, senza notare nulla di particolare nell'istante del passaggio (se il buco nero è abbastanza grande da rendere trascurabili le forze di marea). Non c'è ritorno, ma nemmeno alcun cartello di avviso.</li>
+      </ul>
+      <p>Non sono più oggetti teorici: nel 2019 la collaborazione Event Horizon Telescope ha pubblicato l'immagine dell'ombra del buco nero al centro della galassia M87 (6,5 miliardi di masse solari) e nel 2022 quella di Sagittarius A*, al centro della nostra galassia (4 milioni di masse solari), la cui esistenza era già stata dedotta seguendo per decenni le orbite delle stelle vicine — lavoro premiato con il Nobel per la fisica 2020.</p>
+    </div>
+
+    <div class="card">
+      <h2>5.8 Onde gravitazionali</h2>
+      <p>Se lo spaziotempo è un'entità dinamica, può oscillare. Masse in moto accelerato asimmetrico emettono <strong>onde gravitazionali</strong>: increspature della geometria che si propagano a velocità c, allungando e accorciando alternativamente le distanze trasversali al loro cammino.</p>
+      <p>Sono debolissime: l'onda tipica che ci raggiunge deforma le distanze di una parte su 10<sup>21</sup>, cioè meno di un millesimo del diametro di un protone su un braccio di 4 km. Einstein stesso dubitò a lungo che fossero osservabili. Poi, il <strong>14 settembre 2015</strong>, i due interferometri LIGO registrarono a 7 millisecondi di distanza lo stesso segnale, <strong>GW150914</strong>: la fusione di due buchi neri di circa 30 masse solari ciascuno, avvenuta 1,3 miliardi di anni fa. Nella fusione, circa 3 masse solari sono state convertite in energia gravitazionale in una frazione di secondo — E = mc² su scala cosmica, con una potenza istantanea superiore a quella luminosa di tutte le stelle dell'universo osservabile.</p>
+      <p>Da allora i rivelatori (LIGO negli Stati Uniti, Virgo in Italia presso Pisa, KAGRA in Giappone) hanno registrato centinaia di eventi. Nel 2017 la fusione di due stelle di neutroni è stata osservata sia in onde gravitazionali sia in luce: è nata l'astronomia multimessaggero, e si è verificato che le onde gravitazionali viaggiano alla velocità della luce con uno scarto inferiore a una parte su 10<sup>15</sup>.</p>
+    </div>
+
+    <div class="card">
+      <h2>5.9 Che cosa resta aperto</h2>
+      <p>A più di un secolo di distanza, ogni previsione della relatività generale che siamo stati in grado di mettere alla prova ha superato l'esame. Ma la teoria non chiude il discorso, lo sposta più avanti.</p>
+      <ul>
+        <li><strong>Gravità e quanti non parlano la stessa lingua.</strong> La relatività generale descrive uno spaziotempo continuo e deterministico; la meccanica quantistica descrive il mondo microscopico in termini probabilistici. Dove servirebbero entrambe — il centro di un buco nero, il primissimo universo — nessuna delle due funziona. Costruire una teoria quantistica della gravità è il principale problema aperto della fisica teorica.</li>
+        <li><strong>Cosmologia.</strong> Applicata all'universo intero, la teoria prevede che esso non possa essere statico: è la base del modello del big bang, confermato dall'espansione osservata e dalla radiazione cosmica di fondo. Restano però da capire la materia oscura e l'energia oscura, che insieme costituirebbero circa il 95% del contenuto dell'universo.</li>
+      </ul>
+      <div class="note calm">
+        <b class="tag">Una nota per chiudere</b>
+        Se sei arrivato fin qui, hai attraversato la parte del programma che più mette alla prova l'intuito: hai dovuto rinunciare al tempo assoluto, allo spazio assoluto e infine anche all'idea di forza gravitazionale. Non è un percorso che si assimila in una lettura, e non è un difetto tuo se qualcosa continua a sembrarti strano: la comunità scientifica ci ha messo decenni. Quello che puoi verificare, e che vale più della sensazione di stranezza, è che ogni passaggio segue dal precedente e che ogni previsione è stata confermata dagli esperimenti.
+      </div>
+    </div>
+
+    <div class="secnav"><button data-goto="minkowski">← Spazio di Minkowski</button><button data-goto="finale">Quiz finale →</button></div>
+  </div>
+
+  <div class="pane" data-pane="sim">
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">Tre simulazioni: la cabina di Einstein, lo spaziotempo che si incurva attorno a una massa e gli orologi vicino a un buco nero. La modalità notte rende particolarmente bene la seconda.</p>
+
+    <div class="sim">
+      <h3>La cabina di Einstein: equivalenza fra gravità e accelerazione</h3>
+      <p style="font-size:.94rem;color:var(--text-2)">A sinistra una cabina ferma sulla Terra, a destra la stessa cabina accelerata a g nello spazio profondo. Dentro accade esattamente la stessa cosa: la biglia cade allo stesso modo e il raggio di luce si incurva allo stesso modo.</p>
+      <div class="cvwrap"><canvas data-sim="elevator" width="900" height="470"></canvas></div>
+      <div class="ctrls">
+        <div class="ctrl">
+          <label for="el-exag">Esagerazione della curvatura del raggio <span class="val" id="el-exag-v">×1</span></label>
+          <input type="range" id="el-exag" min="0" max="1" step="0.01" value="0.5">
+        </div>
+      </div>
+      <div class="btnrow">
+        <label class="chk"><input type="checkbox" id="el-light" checked> raggio di luce</label>
+        <label class="chk"><input type="checkbox" id="el-ball" checked> biglia in caduta</label>
+      </div>
+      <p class="simnote">Nella realtà la deviazione del raggio in una stanza alta 3 m è dell'ordine di 10⁻¹³ m: qui è ingigantita di parecchi ordini di grandezza per renderla visibile. L'osservatore chiuso nella cabina non ha alcun modo di stabilire in quale delle due situazioni si trovi: è il principio di equivalenza.</p>
     </div>
 
     <div class="sim">
@@ -1306,19 +1506,20 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
       <p class="simnote">Il fattore è √(1 − r<sub>s</sub>/r). Avvicinandosi all'orizzonte tende a zero: visto da lontano, l'orologio sembra fermarsi. Chi ci sta accanto, però, non nota nulla di strano — il suo secondo dura sempre un secondo. Alla superficie terrestre il fattore vale 0,999999999304: piccolo, ma il GPS lo deve considerare.</p>
     </div>
 
-    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="finale">Quiz finale →</button></div>
+
+    <div class="secnav"><button data-goto="minkowski">← Spazio di Minkowski</button><button data-goto="finale">Quiz finale →</button></div>
   </div>
 
   <div class="pane" data-pane="ese">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">Cinque problemi su diagrammi, tempo proprio lungo linee di universo e relatività generale.</p>
-    <div data-ex="minkowski"></div>
-    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="finale">Quiz finale →</button></div>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">Cinque problemi su raggio di Schwarzschild, dilatazione gravitazionale del tempo e redshift.</p>
+    <div data-ex="generale"></div>
+    <div class="secnav"><button data-goto="minkowski">← Spazio di Minkowski</button><button data-goto="finale">Quiz finale →</button></div>
   </div>
 
   <div class="pane" data-pane="quiz">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici su spazio di Minkowski e relatività generale, con correzione immediata.</p>
-    <div data-quiz="minkowski"></div>
-    <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="finale">Quiz finale →</button></div>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla relatività generale, con correzione immediata.</p>
+    <div data-quiz="generale"></div>
+    <div class="secnav"><button data-goto="minkowski">← Spazio di Minkowski</button><button data-goto="finale">Quiz finale →</button></div>
   </div>
 </section>
 
@@ -1334,7 +1535,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
     Il punteggio serve a te, non a un registro. Se sbagli i problemi numerici ma azzecchi la teoria, probabilmente devi solo esercitarti con i calcoli; se succede il contrario, torna alle sezioni di teoria: le formule applicate senza il quadro concettuale si dimenticano in una settimana.
   </div>
   <div data-quiz="finale"></div>
-  <div class="secnav"><button data-goto="minkowski">← Spazio di Minkowski</button><button data-goto="intro">Torna all'introduzione</button></div>
+  <div class="secnav"><button data-goto="generale">← Relatività generale</button><button data-goto="intro">Torna all'introduzione</button></div>
 </section>
 
 
@@ -1449,7 +1650,8 @@ window.addEventListener('scroll', () => toTop.classList.toggle('show', window.sc
     'spaziotempo': 'Michelson-Morley, i due postulati, simultaneità, dilatazione dei tempi, contrazione delle lunghezze, trasformazioni di Lorentz.',
     'dinamica': 'Quantità di moto relativistica, energia, E = mc², relazione energia-impulso, il limite invalicabile della velocità della luce.',
     'invarianti': "L'intervallo spaziotemporale, tipi di separazione e causalità, tempo proprio, quadrivettori, la massa come invariante.",
-    'minkowski': 'Diagrammi spaziotempo, cono di luce, paradosso dei gemelli, principio di equivalenza, spaziotempo curvo, buchi neri e onde gravitazionali.',
+    'minkowski': 'Diagrammi spaziotempo, linee di universo, cono di luce e causalità, paradosso dei gemelli, rapidità e rotazioni iperboliche.',
+    'generale': 'Principio di equivalenza, spaziotempo curvo e geodetiche, dilatazione gravitazionale del tempo, deflessione della luce, buchi neri e onde gravitazionali.',
     'finale': 'Quindici domande di riepilogo su tutto il percorso, con punteggio e spiegazioni alla consegna.'
   };
   SECTIONS.filter(s => s.key !== 'intro').forEach((s, i) => {
@@ -2167,7 +2369,7 @@ function bindAct(name, fn) { $$('[data-act="' + name + '"]').forEach(b => b.addE
 
 <script>
 /* =====================================================================
-   SIMULAZIONI — SEZIONE 4 (Minkowski e relatività generale)
+   SIMULAZIONI — SEZIONI 4 e 5 (Minkowski e relatività generale)
    ===================================================================== */
 
 /* ---------- 9. Diagramma di Minkowski interattivo ---------- */
@@ -2285,7 +2487,209 @@ function bindAct(name, fn) { $$('[data-act="' + name + '"]').forEach(b => b.addE
   });
 })();
 
-/* ---------- 10. Curvatura dello spaziotempo (telo elastico) ---------- */
+/* ---------- 10. Paradosso dei gemelli animato ---------- */
+(function () {
+  const S = { beta: 0.8, t: 0, play: true, hold: 0, jumped: false, pause: 0 };
+  const T = 8;                                   /* durata coordinata del viaggio, in anni */
+  bindRange('tw-beta', v => { S.beta = v; reset(); }, v => nf(v, 2));
+  bindAct('twins-play', b => { S.play = !S.play; b.textContent = S.play ? 'Pausa' : 'Riprendi'; });
+  bindAct('twins-reset', () => reset());
+  function reset() { S.t = 0; S.hold = 0; S.jumped = false; S.pause = 0; }
+  reg('twins', {
+    anim: true, arm: 0.9,
+    draw(c, w, h, P2, dt) {
+      const b = S.beta, g = gamma(b), D = b * T / 2;
+      /* avanzamento con sosta all'inversione */
+      if (S.play) {
+        if (S.pause > 0) { S.pause -= dt; if (S.pause <= 0) reset(); }
+        else if (S.hold > 0) { S.hold -= dt; }
+        else {
+          S.t += dt * (T / 11);
+          if (!S.jumped && S.t >= T / 2) { S.t = T / 2; S.jumped = true; S.hold = 1.6; }
+          if (S.t >= T) { S.t = T; S.pause = 2.2; }
+        }
+      }
+      const t = S.t, out = t < T / 2 || S.hold > 0;
+      /* geometria del diagramma: pannello laterale solo se c'è spazio */
+      const narrow = w < 560;
+      const plotW = narrow ? w * 0.98 : w * 0.56;
+      const L = 46, R = plotW - 14, TT = 16, B = h - 34;
+      const sc = Math.min((R - L) / 6, (B - TT) / T);
+      const x0 = L + 1.0 * sc, y0 = B;
+      const X = x => x0 + x * sc, Y = ct => y0 - ct * sc;
+      /* assi e griglia */
+      for (let i = -1; i <= 5; i++) line(c, X(i), Y(0), X(i), Y(T), P.line, 1);
+      for (let k = 0; k <= T; k++) {
+        line(c, X(-1), Y(k), X(5), Y(k), P.line, 1);
+        if (k % 2 === 0) txt(c, k, X(-1) - 6, Y(k) + 4, P.muted, 10, 'right');
+      }
+      line(c, X(-1), Y(0), X(5), Y(0), P.line2, 1.5);
+      line(c, X(0), Y(0), X(0), Y(T), P.line2, 1.5);
+      txt(c, 'x (anni luce)', X(5), Y(0) + 18, P.muted, 10.5, 'right');
+      txt(c, 'ct (anni)', X(-1) - 6, Y(T) - 6, P.muted, 10.5, 'left');
+      /* coni di luce dalla partenza */
+      line(c, X(0), Y(0), X(Math.min(5, T)), Y(Math.min(5, T)), P.warm, 1.2, [4, 4]);
+      /* linee di universo */
+      line(c, X(0), Y(0), X(0), Y(T), P.plum, 3.2);
+      c.strokeStyle = P.acc; c.lineWidth = 3.2;
+      c.beginPath(); c.moveTo(X(0), Y(0)); c.lineTo(X(D), Y(T / 2)); c.lineTo(X(0), Y(T)); c.stroke();
+      dot(c, X(D), Y(T / 2), 4.5, P.acc);
+      txt(c, 'stella', X(D) + 8, Y(T / 2) - 8, P.muted, 10, 'left');
+      /* posizioni attuali */
+      const xB = out ? b * t : b * (T - t);
+      const ctA_out = t * (1 - b * b), ctA_in = t + b * b * (T - t);
+      const drawSim = (ctA, col, dash) => {
+        line(c, X(xB), Y(t), X(0), Y(ctA), col, 1.6, dash);
+        dot(c, X(0), Y(ctA), 4, col);
+      };
+      if (S.hold > 0) {
+        /* all'inversione: le due rette di simultaneità e il salto fra loro */
+        c.fillStyle = P.dark ? 'rgba(242,178,76,.20)' : 'rgba(163,90,0,.14)';
+        c.beginPath();
+        c.moveTo(X(0), Y(ctA_out)); c.lineTo(X(xB), Y(t)); c.lineTo(X(0), Y(ctA_in)); c.closePath(); c.fill();
+        drawSim(ctA_out, P.teal, [5, 4]);
+        drawSim(ctA_in, P.warm, [5, 4]);
+        txt(c, 'salto di ' + nf(b * b * T, 1) + ' anni', X(0) + 16, Y((ctA_out + ctA_in) / 2) - 10, P.warm, 11, 'left', '600');
+      } else {
+        drawSim(out ? ctA_out : ctA_in, P.teal, [5, 4]);
+        txt(c, 'per B è "adesso"', X(0) + 8, Y(out ? ctA_out : ctA_in) + 4, P.teal, 10, 'left');
+      }
+      dot(c, X(0), Y(t), 6, P.plum, true);
+      dot(c, X(xB), Y(t), 6, P.acc, true);
+      txt(c, 'A', X(0) - 9, Y(t) + 4, P.plum, 11.5, 'right', '600');
+      txt(c, 'B', X(xB) + 9, Y(t) + 4, P.acc, 11.5, 'left', '600');
+
+      /* pannello a destra */
+      const tau = t / g;
+      if (narrow) {
+        txt(c, 'A: ' + nf(t, 2) + ' anni', 8, h - 24, P.plum, 12, 'left', '600');
+        txt(c, 'B: ' + nf(tau, 2) + ' anni', 8, h - 8, P.acc, 12, 'left', '600');
+        if (S.hold > 0) txt(c, 'salto della simultaneità', w - 8, 14, P.warm, 11, 'right', '600');
+        if ($('#tw-g')) {
+          $('#tw-g').textContent = nf(g, 3);
+          $('#tw-a').textContent = nf(t, 2) + ' a';
+          $('#tw-b').textContent = nf(tau, 2) + ' a';
+          $('#tw-d').textContent = nf(T - T / g, 2) + ' a';
+        }
+        return;
+      }
+      const px = plotW + 12, pw = w - px - 14;
+      txt(c, 'ORA DEL VIAGGIO', px, 26, P.muted, 10.5, 'left', '600');
+      [['Gemello A — resta a casa', t, P.plum, 0], ['Gemello B — viaggia', tau, P.acc, 1]].forEach(r => {
+        const y = 54 + r[3] * 74;
+        txt(c, r[0], px, y, r[2], 11.5, 'left', '600');
+        c.fillStyle = P.line; roundRect(c, px, y + 8, pw, 16, 8); c.fill();
+        c.fillStyle = r[2]; roundRect(c, px, y + 8, Math.max(3, pw * r[1] / T), 16, 8); c.fill();
+        txt(c, nf(r[1], 2) + ' anni', px, y + 42, r[2], 16, 'left', '600');
+      });
+      txt(c, 'γ = ' + nf(g, 3), px, 214, P.text2, 12, 'left', '600');
+      txt(c, 'D = ' + nf(D, 2) + ' anni luce', px, 232, P.text2, 12, 'left');
+      const msg = S.hold > 0
+        ? ['All\'inversione B cambia', 'sistema di riferimento: la sua', 'idea di "adesso" a casa salta', 'in avanti. È qui che la', 'simmetria fra i due si rompe.']
+        : (t >= T ? ['B è tornato con ' + nf(T - T / g, 2) + ' anni', 'in meno di A. Nessun paradosso:', 'solo B ha accelerato, e la sua', 'linea di universo è spezzata.']
+          : (out ? ['Viaggio di andata: ciascuno', 'vede l\'orologio dell\'altro', 'rallentare. Finora la', 'situazione è simmetrica.']
+            : ['Ritorno: la simmetria è già', 'stata rotta dall\'inversione.', 'Il conto finale non è più', 'in parità.']));
+      msg.forEach((line_, i) => txt(c, line_, px, 268 + i * 17, P.muted, 11.5, 'left'));
+      if ($('#tw-g')) {
+        $('#tw-g').textContent = nf(g, 3);
+        $('#tw-a').textContent = nf(t, 2) + ' a';
+        $('#tw-b').textContent = nf(tau, 2) + ' a';
+        $('#tw-d').textContent = nf(T - T / g, 2) + ' a';
+      }
+    }
+  });
+})();
+
+/* ---------- 11. La cabina di Einstein: principio di equivalenza ---------- */
+(function () {
+  const S = { ex: 0.5, light: true, ball: true, t: 0, lt: 0 };
+  bindRange('el-exag', v => { S.ex = v; }, v => nf(4 + v * 26, 0) + '% dell\'altezza');
+  ['el-light', 'el-ball'].forEach(id => {
+    const el = $('#' + id); if (!el) return;
+    el.addEventListener('change', () => { S[id === 'el-light' ? 'light' : 'ball'] = el.checked; markDirty(); });
+  });
+  function cabin(c, x, y, cw, ch, title, sub, col, mode, w) {
+    /* struttura */
+    c.fillStyle = P.dark ? 'rgba(255,255,255,.03)' : 'rgba(0,0,0,.02)';
+    roundRect(c, x, y, cw, ch, 8); c.fill();
+    c.strokeStyle = P.line2; c.lineWidth = 2; c.stroke();
+    line(c, x, y + ch, x + cw, y + ch, P.text2, 3);
+    txt(c, title, x + cw / 2, y - 22, col, 12.5, 'center', '600');
+    txt(c, sub, x + cw / 2, y - 7, P.muted, 10.5, 'center');
+    /* osservatore */
+    const ox = x + cw * 0.17, oy = y + ch - 6;
+    c.strokeStyle = P.text2; c.lineWidth = 1.8;
+    c.beginPath(); c.arc(ox, oy - 34, 5, 0, 6.2832); c.stroke();
+    line(c, ox, oy - 29, ox, oy - 13, P.text2, 1.8);
+    line(c, ox, oy - 13, ox - 5, oy, P.text2, 1.8); line(c, ox, oy - 13, ox + 5, oy, P.text2, 1.8);
+    line(c, ox, oy - 25, ox - 7, oy - 18, P.text2, 1.8); line(c, ox, oy - 25, ox + 7, oy - 18, P.text2, 1.8);
+    /* biglia in caduta: stessa legge nelle due cabine */
+    if (S.ball) {
+      const per = 1.7, tt = (S.t % per) / per;
+      const yb = y + 16 + (ch - 34) * tt * tt;
+      line(c, x + cw * 0.45, y + 16, x + cw * 0.45, yb, P.line2, 1, [3, 3]);
+      dot(c, x + cw * 0.45, yb, 6, P.warm, true);
+    }
+    /* raggio di luce: parabola con esagerazione regolabile */
+    if (S.light) {
+      const drop = ch * (0.04 + S.ex * 0.26);
+      const yL = y + ch * 0.30;
+      c.strokeStyle = P.teal; c.lineWidth = 2; c.beginPath();
+      for (let k = 0; k <= 1.001; k += 0.02) {
+        const px = x + k * cw, py = yL + drop * k * k;
+        k === 0 ? c.moveTo(px, py) : c.lineTo(px, py);
+      }
+      c.stroke();
+      line(c, x, yL, x + cw, yL, P.muted, 1, [4, 4]);
+      const k = (S.lt % 1.6) / 1.6;
+      dot(c, x + k * cw, yL + drop * k * k, 4.5, P.teal, true);
+      txt(c, 'il raggio arriva più in basso', x + cw / 2, yL + drop + 18, P.teal, 10.5, 'center');
+    }
+    /* ambiente esterno */
+    if (mode === 'terra') {
+      c.fillStyle = P.dark ? 'rgba(168,147,255,.18)' : 'rgba(91,60,230,.12)';
+      c.beginPath(); c.arc(x + cw / 2, y + ch + cw * 0.78, cw * 0.72, Math.PI * 1.22, Math.PI * 1.78); c.fill();
+      txt(c, 'superficie terrestre', x + cw / 2, y + ch + 52, P.muted, 10, 'center');
+      txt(c, 'g = 9,8 m/s²  verso il basso', x + cw / 2, y + ch + 22, P.muted, 10.5, 'center');
+    } else {
+      const fl = 22 + Math.abs(Math.sin(S.t * 9)) * 20;
+      for (let i = -1; i <= 1; i++) {
+        const fx = x + cw / 2 + i * 20, fw = i === 0 ? 11 : 8, fh = i === 0 ? fl : fl * 0.7;
+        c.fillStyle = i === 0 ? P.warm : P.acc;
+        c.globalAlpha = .75;
+        c.beginPath();
+        c.moveTo(fx - fw, y + ch + 2); c.quadraticCurveTo(fx - fw * 0.4, y + ch + fh * 0.6, fx, y + ch + fh);
+        c.quadraticCurveTo(fx + fw * 0.4, y + ch + fh * 0.6, fx + fw, y + ch + 2); c.closePath(); c.fill();
+        c.globalAlpha = 1;
+      }
+      txt(c, 'accelerazione a = 9,8 m/s²  verso l\'alto', x + cw / 2, y + ch + 62, P.muted, 10.5, 'center');
+      line(c, x + cw + 18, y + ch * 0.72, x + cw + 18, y + ch * 0.22, P.acc, 2);
+      line(c, x + cw + 18, y + ch * 0.22, x + cw + 13, y + ch * 0.31, P.acc, 2);
+      line(c, x + cw + 18, y + ch * 0.22, x + cw + 23, y + ch * 0.31, P.acc, 2);
+      txt(c, 'a', x + cw + 26, y + ch * 0.47, P.acc, 12, 'left', '600');
+    }
+  }
+  reg('elevator', {
+    anim: true, arm: 0.62,
+    draw(c, w, h, P2, dt) {
+      S.t += dt; S.lt += dt;
+      if (w < 560) {                                   /* impaginazione verticale */
+        const cw = w * 0.58, cx = w * 0.21, ch = h * 0.25;
+        cabin(c, cx, h * 0.08, cw, ch, 'Ferma sulla Terra', 'campo gravitazionale', P.acc, 'terra', w);
+        cabin(c, cx, h * 0.53, cw, ch, 'Nello spazio, in accelerazione', 'nessuna massa nei paraggi', P.teal, 'razzo', w);
+        txt(c, 'nessun esperimento interno distingue', w / 2, h - 20, P.text2, 11, 'center', '600');
+        txt(c, 'le due situazioni', w / 2, h - 6, P.text2, 11, 'center', '600');
+        return;
+      }
+      const cw = w * 0.36, ch = h * 0.52, y = h * 0.20;
+      cabin(c, w * 0.06, y, cw, ch, 'Ferma sulla Terra', 'campo gravitazionale', P.acc, 'terra', w);
+      cabin(c, w * 0.58, y, cw, ch, 'Nello spazio, in accelerazione', 'nessuna massa nei paraggi', P.teal, 'razzo', w);
+      txt(c, 'Nessun esperimento eseguito dentro la cabina distingue le due situazioni.', w / 2, h - 12, P.text2, 12, 'center', '600');
+    }
+  });
+})();
+
+/* ---------- 12. Curvatura dello spaziotempo (telo elastico) ---------- */
 (function () {
   const S = { M: 1, Mcur: 1, v: 1, light: true, trail: true, p: null, tr: [], ph: null, cool: 0 };
   function GM(M) { return 2.0e6 * Math.max(M, 0.0001); }
@@ -2402,7 +2806,7 @@ function bindAct(name, fn) { $$('[data-act="' + name + '"]').forEach(b => b.addE
   });
 })();
 
-/* ---------- 11. Dilatazione gravitazionale del tempo ---------- */
+/* ---------- 13. Dilatazione gravitazionale del tempo ---------- */
 (function () {
   const S = { r: 4, t: 0 };
   bindRange('gt-r', v => { S.r = v; }, v => nf(v, 2));
@@ -2615,7 +3019,33 @@ minkowski: [
    v:8, tol:0.02, u:'anni',
    s:'t (Terra) = 2 × 3,0/0,60 = 10 anni; γ = 1,25 → τ = 10/1,25 = 8,0 anni. Il viaggiatore torna con 2 anni in meno. Non è un paradosso: la sua linea di universo è spezzata e nello spaziotempo il percorso rettilineo è quello di tempo proprio massimo.' },
 
- { t:'Raggio di Schwarzschild',
+ { t:'Coordinate di un evento in un altro sistema',
+   d:'Nel sistema S un evento ha coordinate x = 3,0 anni luce e ct = 4,0 anni. Il sistema S′ si muove a β = 0,60. Quanto vale x′, in anni luce?',
+   h:['Usa la trasformazione di Lorentz nella forma con ct: x′ = γ(x − β·ct).',
+      'Per β = 0,60 il fattore γ vale 1,25.',
+      'x − β·ct = 3,0 − 0,60 × 4,0 = 0,60.'],
+   v:0.75, tol:0.03, u:'anni luce',
+   s:'x′ = 1,25 × (3,0 − 2,4) = 0,75 anni luce. Per esercizio calcola anche ct′ = γ(ct − βx) = 1,25 × (4,0 − 1,8) = 2,75 anni. Verifica finale: l\'intervallo si conserva, perché 4,0² − 3,0² = 7,0 e 2,75² − 0,75² = 7,0.' },
+
+ { t:'Simultaneità rotta',
+   d:'Due eventi sono simultanei nel sistema S e distano 6,0 anni luce. Quanto vale la separazione temporale |Δt′| misurata da un sistema S′ in moto a β = 0,50?',
+   h:['Parti da Δt′ = γ(Δt − βΔx/c). Qui Δt = 0, quindi resta solo il secondo termine.',
+      'In unità di anni e anni luce: |Δt′| = γ·β·Δx.',
+      'Per β = 0,50 si ha γ = 1/√0,75 ≈ 1,155.'],
+   v:3.46, tol:0.03, u:'anni',
+   s:'|Δt′| = 1,155 × 0,50 × 6,0 ≈ 3,46 anni. Eventi perfettamente simultanei in S risultano separati da oltre tre anni in S′: è il termine −vx/c² delle trasformazioni di Lorentz, cioè la relatività della simultaneità. Nota che l\'effetto cresce con la distanza fra gli eventi.' },
+
+ { t:'Tempo proprio su un percorso spezzato',
+   d:'Un\'astronave va da (x = 0, ct = 0) a (x = 3,0 al, ct = 5,0 a), poi torna a (x = 0, ct = 10,0 a). Quanto tempo proprio totale accumula, in anni?',
+   h:['Il tempo proprio va calcolato tratto per tratto, con Δτ = √(Δt² − Δx²/c²).',
+      'Primo tratto: Δt = 5,0 anni, Δx = 3,0 anni luce. Il secondo tratto è identico per simmetria.',
+      '√(25 − 9) = 4,0 per ciascun tratto.'],
+   v:8, tol:0.02, u:'anni',
+   s:'Ogni tratto dà √(5,0² − 3,0²) = 4,0 anni, quindi in totale 8,0 anni contro i 10,0 anni di chi resta fermo in x = 0. È il paradosso dei gemelli calcolato con gli intervalli: la linea spezzata ha tempo proprio minore della retta. Errore tipico: applicare la formula all\'intero viaggio (Δt = 10, Δx = 0) ottenendo 10 anni — non si può, perché la traiettoria non è rettilinea.' }
+],
+
+generale: [
+ { t:'Raggio di Schwarzschild del Sole',
    d:'Calcola il raggio di Schwarzschild del Sole (M = 1,99 × 10³⁰ kg). Usa G = 6,67 × 10⁻¹¹ N·m²/kg² e c = 3,00 × 10⁸ m/s. Esprimi il risultato in metri.',
    h:['La formula è r_s = 2GM/c².',
       'Calcola il numeratore: 2 × 6,67×10⁻¹¹ × 1,99×10³⁰ ≈ 2,65 × 10²⁰.',
@@ -2623,13 +3053,29 @@ minkowski: [
    v:2950, tol:0.05, u:'m',
    s:'r_s = 2GM/c² ≈ 2,65×10²⁰ / 9,00×10¹⁶ ≈ 2,95 × 10³ m, cioè circa 3 km. Il Sole ha un raggio di 700 000 km: per diventare un buco nero dovrebbe essere compresso di un fattore 230 000. Il raggio di Schwarzschild non è una superficie materiale ma un confine causale.' },
 
- { t:'Dilatazione gravitazionale del tempo',
+ { t:'Orologi vicino a un buco nero',
    d:'Un orologio si trova a distanza r = 4,0 r_s dal centro di un buco nero. Per ogni secondo misurato lontano dalla massa, quanti secondi segna quell\'orologio?',
    h:['Il fattore è √(1 − r_s/r).',
       'Con r = 4 r_s si ha r_s/r = 0,25.',
       '√(1 − 0,25) = √0,75.'],
    v:0.866, tol:0.02, u:'s',
-   s:'√0,75 ≈ 0,866: l\'orologio vicino alla massa segna 0,866 s per ogni secondo lontano. Avvicinandosi all\'orizzonte (r → r_s) il fattore tende a zero e, visto da lontano, l\'orologio sembra fermarsi. Per chi gli sta accanto, però, un secondo dura sempre un secondo.' },
+   s:'√0,75 ≈ 0,866: l\'orologio vicino alla massa segna 0,866 s per ogni secondo lontano. Avvicinandosi all\'orizzonte (r → r_s) il fattore tende a zero e, visto da lontano, l\'orologio sembra fermarsi. Per chi gli sta accanto, però, un secondo dura sempre un secondo: nessuno vede il proprio orologio rallentare.' },
+
+ { t:'Redshift gravitazionale (Pound e Rebka)',
+   d:'Nell\'esperimento della torre di Harvard, un fotone gamma sale per h = 22,5 m nel campo gravitazionale terrestre. Quanto vale lo spostamento relativo di frequenza |Δν/ν|? (g = 9,81 m/s², c = 3,00 × 10⁸ m/s)',
+   h:['Per campi deboli vale |Δν/ν| = gh/c².',
+      'Numeratore: 9,81 × 22,5 ≈ 221.',
+      'Dividi per c² = 9,00 × 10¹⁶ e scrivi il risultato in notazione scientifica (per esempio 2,5e-15).'],
+   v:2.45e-15, tol:0.06, u:'(numero puro)',
+   s:'|Δν/ν| = 9,81 × 22,5 / 9,00×10¹⁶ ≈ 2,45 × 10⁻¹⁵. È una variazione di due parti su un milione di miliardi: fu misurabile solo grazie all\'effetto Mössbauer, che fornisce righe gamma estremamente strette. La luce che sale perde energia e si arrossa; equivalentemente, l\'orologio in basso batte più lentamente.' },
+
+ { t:'Un buco nero supermassiccio',
+   d:'Il buco nero al centro della galassia M87 ha una massa di circa 6,5 × 10⁹ masse solari (1 massa solare = 1,99 × 10³⁰ kg). Quanto vale il suo raggio di Schwarzschild, in metri?',
+   h:['Puoi sfruttare il risultato del primo esercizio: r_s è proporzionale alla massa.',
+      'Se per una massa solare r_s ≈ 2,95 × 10³ m, per 6,5 × 10⁹ masse solari basta moltiplicare.',
+      '2,95×10³ × 6,5×10⁹.'],
+   v:1.9e13, tol:0.08, u:'m',
+   s:'r_s ≈ 2,95×10³ × 6,5×10⁹ ≈ 1,9 × 10¹³ m, circa 128 unità astronomiche: l\'orizzonte è più grande dell\'intero Sistema Solare fino a Plutone. È questa dimensione enorme che ha reso possibile fotografarne l\'ombra nel 2019 con l\'Event Horizon Telescope, nonostante i 55 milioni di anni luce di distanza.' },
 
  { t:'Perché il GPS ha bisogno di Einstein',
    d:'Gli orologi dei satelliti GPS, senza correzioni, anticiperebbero di 38 μs al giorno rispetto a quelli a terra. A quale errore di posizione corrisponde, in chilometri, dopo un giorno? (La posizione si ricava da tempi di volo di segnali radio, che viaggiano a c.)',
@@ -2962,12 +3408,24 @@ QUIZ.invarianti = { titolo: 'Quiz — Invarianti relativistici', teoria: [
    e:'γ = Δt/Δτ = 10/8 = 1,25 (a cui corrisponde β = 0,6). Il valore 0,80 è il rapporto inverso Δτ/Δt: ricorda che γ ≥ 1 sempre, quindi un risultato minore di 1 segnala il rapporto capovolto.' }
 ]};
 
-QUIZ.minkowski = { titolo: 'Quiz — Spazio di Minkowski e relatività generale', teoria: [
+QUIZ.minkowski = { titolo: 'Quiz — Spazio di Minkowski', teoria: [
  { d:'In un diagramma di Minkowski con assi x e ct, la luce è rappresentata da:',
    o:['rette a 45°, le stesse per tutti gli osservatori', 'rette verticali',
       'rette orizzontali', 'rette la cui inclinazione dipende dal sistema di riferimento'],
    c:0,
    e:'Con ct sull\'asse verticale, alla luce corrisponde ct = ±x, cioè 45°. Il fatto che queste rette non cambino al cambiare dell\'osservatore è la traduzione geometrica del secondo postulato: è l\'unica struttura del diagramma che resta fissa.' },
+ { d:'Che cosa rappresenta la linea di universo di un corpo fermo nel sistema considerato?',
+   o:['Una retta verticale, parallela all\'asse ct', 'Un punto, perché non si muove',
+      'Una retta orizzontale, parallela all\'asse x', 'Una retta a 45°'],
+   c:0,
+   e:'Anche un corpo fermo avanza nel tempo: la sua linea di universo è verticale. Rappresentarlo con un punto è l\'errore concettuale più comune all\'inizio, perché si continua a pensare al diagramma come a una mappa dello spazio anziché dello spaziotempo.' },
+ { d:'Perché nessuna linea di universo di un corpo materiale può inclinarsi oltre i 45°?',
+   o:['Perché corrisponderebbe a una velocità maggiore di c, e questo romperebbe la causalità',
+      'Perché il diagramma è disegnato solo fino a 45°',
+      'Perché oltre i 45° il tempo diventerebbe negativo',
+      'In realtà può, purché il corpo abbia massa piccolissima'],
+   c:0,
+   e:'La pendenza rispetto all\'asse ct misura la velocità: 45° corrisponde esattamente a c. Superarli significherebbe collegare eventi di tipo spazio, e allora esisterebbe un osservatore per cui l\'effetto precede la causa. Il vincolo vale per qualunque massa, per quanto piccola.' },
  { d:'Che cosa rappresenta la regione detta "altrove" (elsewhere)?',
    o:['Gli eventi che non possono né influenzare né essere influenzati dall\'evento considerato',
       'Gli eventi che accadono in un altro universo',
@@ -2982,6 +3440,13 @@ QUIZ.minkowski = { titolo: 'Quiz — Spazio di Minkowski e relatività generale'
       'Si allontanano dalla bisettrice a 45°'],
    c:0,
    e:'Gli assi si chiudono simmetricamente verso il cono di luce, come le lame di una forbice: non è una rotazione euclidea (in cui resterebbero perpendicolari) ma una rotazione iperbolica. Il cono di luce resta la bisettrice per entrambi i sistemi.' },
+ { d:'Perché nel diagramma di Minkowski le unità di misura sugli assi di S′ non si leggono con un righello ordinario?',
+   o:['Perché la geometria dello spaziotempo ha il segno meno: le unità si trovano con le iperboli di calibrazione',
+      'Perché il disegno non è mai in scala',
+      'Perché gli assi di S′ sono più corti di quelli di S',
+      'Perché le unità di S′ sono sempre il doppio di quelle di S'],
+   c:0,
+   e:'La distanza euclidea sul foglio non ha significato fisico: quello che conta è l\'intervallo c²t² − x². I punti "a distanza 1" da un evento formano iperboli, non circonferenze, e sono quelle a fissare l\'unità su ciascun asse. È il motivo per cui due osservatori possono ciascuno vedere l\'orologio dell\'altro rallentare senza contraddizione.' },
  { d:'Nel paradosso dei gemelli, perché il gemello che viaggia torna più giovane?',
    o:['Perché la sua linea di universo non è inerziale: solo lui cambia sistema di riferimento invertendo la rotta',
       'Perché la relatività ristretta non vale per lui',
@@ -2994,41 +3459,20 @@ QUIZ.minkowski = { titolo: 'Quiz — Spazio di Minkowski e relatività generale'
       'La linea che si avvicina di più al cono di luce', 'Tutte le linee danno lo stesso tempo proprio'],
    c:0,
    e:'È il rovesciamento rispetto alla geometria euclidea: nello spaziotempo la "retta" è il percorso di durata massima, non minima. Il segno meno nella metrica capovolge la disuguaglianza triangolare, e da qui il risultato del paradosso dei gemelli.' },
- { d:'Che cosa afferma il principio di equivalenza?',
-   o:['In una regione sufficientemente piccola, un campo gravitazionale uniforme è indistinguibile da un\'accelerazione',
-      'La massa è equivalente all\'energia secondo E = mc²',
-      'Tutti i sistemi di riferimento inerziali sono equivalenti',
-      'Gravità ed elettromagnetismo sono la stessa forza'],
+ { d:'Che cosa hanno di speciale le rapidità φ, definite da tanh φ = β?',
+   o:['Si sommano: componendo due boost successivi le rapidità si addizionano',
+      'Sono sempre minori di 1, come le velocità',
+      'Coincidono con il fattore di Lorentz γ',
+      'Sono invarianti: hanno lo stesso valore per tutti gli osservatori'],
    c:0,
-   e:'È l\'osservazione che dentro un ascensore chiuso non si può distinguere la quiete in un campo gravitazionale dall\'accelerazione nello spazio profondo. La clausola "in una regione sufficientemente piccola" è essenziale: su regioni ampie le forze di marea rivelano la differenza. L\'equivalenza massa-energia è un\'altra cosa.' },
- { d:'Su quale fatto sperimentale si fonda il principio di equivalenza?',
-   o:['Sull\'uguaglianza fra massa inerziale e massa gravitazionale, verificata con enorme precisione',
-      'Sulla costanza della velocità della luce',
-      'Sul risultato nullo dell\'esperimento di Michelson-Morley',
-      'Sulla quantizzazione dell\'energia'],
+   e:'È la rapidità, non la velocità, a comportarsi come suggerisce l\'intuizione galileiana: φ = φ₁ + φ₂. La formula di composizione delle velocità è semplicemente questa addizione riscritta con β = tanh φ. Poiché tanh tende a 1 solo per φ → ∞, per quanta rapidità si accumuli non si raggiunge mai c.' },
+ { d:'Nel paradosso del palo e del granaio, come si risolve il disaccordo fra il contadino e chi porta il palo?',
+   o:['Osservando che le due porte, simultanee per il contadino, non lo sono per il palo',
+      'Concludendo che uno dei due sta semplicemente sbagliando la misura',
+      'Ammettendo che il palo si deforma per effetto di una forza',
+      'Affermando che la contrazione delle lunghezze non è reale'],
    c:0,
-   e:'Nella meccanica newtoniana l\'uguaglianza fra le due masse è una coincidenza inspiegata; in relatività generale diventa il punto di partenza. È il motivo per cui tutti i corpi cadono con la stessa accelerazione, indipendentemente dalla loro composizione.' },
- { d:'Nella relatività generale, come si descrive il moto di un pianeta attorno al Sole?',
-   o:['Segue una geodetica, cioè la traiettoria più "dritta" possibile in uno spaziotempo curvato dalla massa del Sole',
-      'È tenuto in orbita da una forza attrattiva che si propaga istantaneamente',
-      'È spinto dall\'etere che ruota attorno al Sole',
-      'Si muove di moto rettilineo uniforme, e siamo noi a vederlo curvo'],
-   c:0,
-   e:'La sintesi di Wheeler: la materia dice allo spaziotempo come curvarsi, lo spaziotempo dice alla materia come muoversi. Non c\'è forza, c\'è geometria — e questo risolve anche l\'incompatibilità della gravità newtoniana istantanea con il limite c.' },
- { d:'Che cosa fu osservato durante l\'eclissi del 1919?',
-   o:['La deflessione della luce delle stelle in prossimità del Sole, di entità doppia rispetto alla previsione newtoniana',
-      'Il rallentamento degli orologi a bordo di un aereo',
-      'La precessione del perielio di Mercurio',
-      'Le onde gravitazionali emesse dal Sole'],
-   c:0,
-   e:'La spedizione di Eddington misurò una deviazione di circa 1,75 secondi d\'arco, in accordo con la relatività generale e doppia rispetto al calcolo newtoniano ingenuo: il fattore 2 viene dal contributo della curvatura spaziale. Lo stesso fenomeno oggi si osserva nelle lenti gravitazionali.' },
- { d:'Che cosa sono le onde gravitazionali rivelate da LIGO nel 2015?',
-   o:['Increspature della geometria dello spaziotempo che si propagano alla velocità della luce',
-      'Onde elettromagnetiche di frequenza bassissima emesse dai buchi neri',
-      'Oscillazioni dell\'etere provocate da masse in rotazione',
-      'Variazioni della costante di gravitazione universale'],
-   c:0,
-   e:'Sono deformazioni dello spaziotempo stesso, non onde elettromagnetiche né vibrazioni di un mezzo. L\'evento GW150914 fu prodotto dalla fusione di due buchi neri: circa 3 masse solari convertite in energia gravitazionale in una frazione di secondo.' }
+   e:'Il nodo è ancora la simultaneità: per il contadino le porte si chiudono nello stesso istante con il palo tutto dentro, per il palo si chiudono in istanti diversi e non c\'è mai un momento in cui sia interamente contenuto. Entrambe le descrizioni sono corrette e nessuna implica deformazioni fisiche del palo.' }
 ], problemi: [
  { d:'Di quale angolo è inclinato l\'asse ct′ rispetto all\'asse ct, per β = 0,60?',
    o:['≈ 31°', '≈ 45°', '≈ 60°', '≈ 37°'],
@@ -3038,6 +3482,93 @@ QUIZ.minkowski = { titolo: 'Quiz — Spazio di Minkowski e relatività generale'
    o:['8,0 anni', '10,0 anni', '6,0 anni', '12,5 anni'],
    c:0,
    e:'Sulla Terra passano t = 2 × 3,0/0,60 = 10 anni; con γ = 1,25, a bordo τ = 10/1,25 = 8,0 anni. Il valore 10 anni è il tempo terrestre: il tempo di bordo deve risultare minore, perché è il tempo proprio.' },
+ { d:'Un evento ha coordinate x = 3,0 anni luce e ct = 4,0 anni in S. Quali sono le sue coordinate in S′, che si muove a β = 0,60?',
+   o:['x′ = 0,75 al ; ct′ = 2,75 a', 'x′ = 2,75 al ; ct′ = 0,75 a',
+      'x′ = 0,60 al ; ct′ = 2,20 a', 'x′ = 3,75 al ; ct′ = 5,00 a'],
+   c:0,
+   e:'Con γ = 1,25: x′ = γ(x − β·ct) = 1,25 × (3,0 − 2,4) = 0,75 e ct′ = γ(ct − βx) = 1,25 × (4,0 − 1,8) = 2,75. Controllo di coerenza: l\'intervallo si conserva, perché 4,0² − 3,0² = 7,0 e anche 2,75² − 0,75² = 7,0.' },
+ { d:'Due eventi simultanei in S distano 6,0 anni luce. Quale separazione temporale misura S′, in moto a β = 0,50?',
+   o:['≈ 3,5 anni', '0, perché la simultaneità si conserva', '≈ 3,0 anni', '≈ 12 anni'],
+   c:0,
+   e:'|Δt′| = γβΔx/c = 1,155 × 0,50 × 6,0 ≈ 3,46 anni. Il termine −vx/c² delle trasformazioni di Lorentz cresce con la distanza fra gli eventi: la simultaneità si conserva solo per eventi che avvengono nello stesso luogo.' },
+ { d:'Quanto vale la rapidità φ di un sistema con β = 0,80, sapendo che tanh φ = β?',
+   o:['≈ 1,10', '≈ 0,80', '≈ 1,67', '≈ 0,66'],
+   c:0,
+   e:'φ = artanh(0,80) = ½·ln(1,8/0,2) = ½·ln 9 ≈ 1,10. Il valore 1,67 è il fattore γ = cosh φ, che è cosa diversa. Nota che la rapidità, a differenza di β, non ha alcun limite superiore.' }
+]};
+
+QUIZ.generale = { titolo: 'Quiz — Relatività generale', teoria: [
+ { d:'Perché la gravità di Newton è incompatibile con la relatività ristretta?',
+   o:['Perché agisce istantaneamente a distanza, mentre nessuna influenza può propagarsi più veloce di c',
+      'Perché prevede orbite ellittiche invece che circolari',
+      'Perché non vale per corpi di massa molto grande',
+      'Perché non conserva l\'energia'],
+   c:0,
+   e:'Nella legge di Newton la forza dipende dalla distanza nell\'istante stesso: se il Sole sparisse, la Terra devierebbe subito. Ma "nello stesso istante" non ha senso assoluto in relatività, e nessuna informazione può viaggiare più veloce della luce. Serviva una teoria in cui anche la gravità si propagasse a velocità finita.' },
+ { d:'Che cosa afferma il principio di equivalenza?',
+   o:['In una regione sufficientemente piccola, un campo gravitazionale uniforme è indistinguibile da un\'accelerazione',
+      'La massa è equivalente all\'energia secondo E = mc²',
+      'Tutti i sistemi di riferimento inerziali sono equivalenti',
+      'Gravità ed elettromagnetismo sono la stessa interazione'],
+   c:0,
+   e:'È l\'esperimento mentale della cabina chiusa: nessuna misura interna distingue la quiete sulla Terra dall\'accelerazione a 9,8 m/s² nello spazio profondo. L\'equivalenza massa-energia è un risultato diverso, della relatività ristretta; l\'equivalenza dei sistemi inerziali è il primo postulato del 1905.' },
+ { d:'Su quale fatto sperimentale si fonda il principio di equivalenza?',
+   o:['Sull\'uguaglianza fra massa inerziale e massa gravitazionale, verificata con enorme precisione',
+      'Sulla costanza della velocità della luce',
+      'Sul risultato nullo dell\'esperimento di Michelson-Morley',
+      'Sulla quantizzazione dell\'energia'],
+   c:0,
+   e:'Nella meccanica newtoniana l\'uguaglianza fra le due masse è una coincidenza inspiegata; in relatività generale diventa il punto di partenza. È il motivo per cui tutti i corpi cadono con la stessa accelerazione, ed è verificata oggi a una parte su 10¹⁵.' },
+ { d:'Perché il principio di equivalenza vale solo "localmente"?',
+   o:['Perché in una regione estesa compaiono le forze di marea, che nessun cambio di riferimento può eliminare',
+      'Perché lontano dalla Terra la gravità non esiste',
+      'Perché gli orologi non si possono sincronizzare su lunghe distanze',
+      'Perché la luce impiega tempo ad attraversare la cabina'],
+   c:0,
+   e:'In una cabina abbastanza grande due biglie lasciate cadere ai lati opposti convergono, perché puntano entrambe al centro del pianeta, mentre in un razzo accelerato resterebbero parallele. Le forze di marea sono la firma della curvatura vera e distinguono la gravità da una semplice accelerazione.' },
+ { d:'Nella relatività generale, come si descrive il moto di un pianeta attorno al Sole?',
+   o:['Segue una geodetica, cioè la traiettoria più "dritta" possibile in uno spaziotempo curvato dalla massa del Sole',
+      'È tenuto in orbita da una forza attrattiva che si propaga istantaneamente',
+      'È spinto dall\'etere che ruota attorno al Sole',
+      'Si muove di moto rettilineo uniforme, e siamo noi a vederlo curvo'],
+   c:0,
+   e:'La sintesi di Wheeler: la materia dice allo spaziotempo come curvarsi, lo spaziotempo dice alla materia come muoversi. Non c\'è forza, c\'è geometria — e questo risolve l\'incompatibilità della gravità istantanea con il limite c.' },
+ { d:'Qual è il limite principale dell\'analogia del telo elastico deformato da una palla?',
+   o:['Mostra solo la curvatura dello spazio, mentre per un corpo che cade è dominante quella del tempo',
+      'Rappresenta troppe dimensioni rispetto a quelle reali',
+      'Suggerisce erroneamente che i pianeti si muovano su orbite chiuse',
+      'Non ha limiti: è una rappresentazione fedele della relatività generale'],
+   c:0,
+   e:'L\'analogia è utile ma tradisce su tre punti: ignora la curvatura temporale (quella che fa cadere il sasso), usa la gravità per spiegare la gravità e suggerisce che lo spaziotempo si incurvi dentro uno spazio esterno, mentre la curvatura è intrinseca.' },
+ { d:'Due orologi identici, uno al piano terra e uno all\'ultimo piano di un grattacielo. Quale batte più lentamente?',
+   o:['Quello in basso, dove il potenziale gravitazionale è minore',
+      'Quello in alto, perché è più lontano dal centro della Terra',
+      'Battono allo stesso ritmo: la gravità non influisce sul tempo',
+      'Dipende dalla stagione'],
+   c:0,
+   e:'Più si è "in basso" nel campo gravitazionale, più il tempo proprio scorre lentamente: Δτ = Δt√(1 − 2GM/rc²). L\'effetto è minuscolo (circa 10⁻¹⁶ per metro di dislivello) ma è stato misurato da Pound e Rebka nel 1959 e oggi si rivela con pochi centimetri di differenza di quota.' },
+ { d:'Che cosa fu osservato durante l\'eclissi del 1919?',
+   o:['La deflessione della luce delle stelle in prossimità del Sole, di entità doppia rispetto alla previsione newtoniana',
+      'Il rallentamento degli orologi a bordo di un aereo',
+      'La precessione del perielio di Mercurio',
+      'Le onde gravitazionali emesse dal Sole'],
+   c:0,
+   e:'La spedizione di Eddington misurò una deviazione di circa 1,75 secondi d\'arco, in accordo con la relatività generale e doppia rispetto al calcolo newtoniano ingenuo: metà dell\'effetto viene dalla curvatura del tempo, metà da quella dello spazio. Lo stesso fenomeno oggi si osserva nelle lenti gravitazionali.' },
+ { d:'Che cos\'è l\'orizzonte degli eventi di un buco nero?',
+   o:['Un confine causale oltre il quale nessun segnale può più uscire, non una superficie materiale',
+      'La superficie solida del buco nero',
+      'Il punto in cui la materia raggiunge la velocità della luce',
+      'Una regione in cui le leggi della fisica smettono di valere'],
+   c:0,
+   e:'È la sfera di raggio r_s = 2GM/c², dove tutti i coni di luce sono inclinati verso l\'interno. Chi cade la attraversa in un tempo proprio finito senza notare nulla di speciale, mentre chi guarda da lontano lo vede rallentare e arrossarsi indefinitamente. Le leggi della fisica continuano a valere: è il ritorno indietro a essere impossibile.' },
+ { d:'Che cosa sono le onde gravitazionali rivelate da LIGO nel 2015?',
+   o:['Increspature della geometria dello spaziotempo che si propagano alla velocità della luce',
+      'Onde elettromagnetiche di frequenza bassissima emesse dai buchi neri',
+      'Oscillazioni dell\'etere provocate da masse in rotazione',
+      'Variazioni della costante di gravitazione universale'],
+   c:0,
+   e:'Sono deformazioni dello spaziotempo stesso, non onde elettromagnetiche né vibrazioni di un mezzo. L\'evento GW150914 fu prodotto dalla fusione di due buchi neri di circa 30 masse solari: in una frazione di secondo circa 3 masse solari sono state convertite in energia gravitazionale.' }
+], problemi: [
  { d:'Quanto vale il raggio di Schwarzschild della Terra (M = 5,97 × 10²⁴ kg)?',
    o:['≈ 8,9 mm', '≈ 8,9 m', '≈ 3,0 km', '≈ 6400 km'],
    c:0,
@@ -3045,11 +3576,19 @@ QUIZ.minkowski = { titolo: 'Quiz — Spazio di Minkowski e relatività generale'
  { d:'A distanza r = 2 r_s da un buco nero, quanto vale il fattore di rallentamento degli orologi √(1 − r_s/r)?',
    o:['≈ 0,71', '≈ 0,50', '≈ 0,87', '≈ 1,41'],
    c:0,
-   e:'√(1 − 0,5) = √0,5 ≈ 0,707: per ogni secondo lontano dalla massa, l\'orologio vicino ne segna 0,71. Il valore 0,50 è il rapporto r_s/r senza la radice; nessun fattore può risultare maggiore di 1, perché l\'orologio vicino non può andare più veloce.' },
+   e:'√(1 − 0,5) = √0,5 ≈ 0,707: per ogni secondo lontano dalla massa, l\'orologio vicino ne segna 0,71. Il valore 0,50 è il rapporto r_s/r senza la radice; nessun fattore può risultare maggiore di 1, perché l\'orologio vicino non può andare più veloce di quello lontano.' },
  { d:'Gli orologi GPS, senza correzioni relativistiche, sbaglierebbero di circa 38 μs al giorno. A quale errore di posizione corrisponde?',
    o:['≈ 11 km al giorno', '≈ 11 m al giorno', '≈ 38 km al giorno', '≈ 1,1 km al giorno'],
    c:0,
-   e:'Δx = c·Δt = 3,0×10⁸ × 38×10⁻⁶ ≈ 1,1 × 10⁴ m. I 38 μs risultano da −7 μs (velocità orbitale, relatività ristretta) e +45 μs (campo gravitazionale più debole, relatività generale): senza entrambe le correzioni il sistema sarebbe inservibile in poche ore.' }
+   e:'Δx = c·Δt = 3,0×10⁸ × 38×10⁻⁶ ≈ 1,1 × 10⁴ m. I 38 μs risultano da −7 μs (velocità orbitale, relatività ristretta) e +45 μs (campo gravitazionale più debole, relatività generale): senza entrambe le correzioni il sistema sarebbe inservibile in poche ore.' },
+ { d:'Un fotone sale di h = 22,5 m nel campo gravitazionale terrestre (esperimento di Pound e Rebka). Quanto vale |Δν/ν| ≈ gh/c²?',
+   o:['≈ 2,5 × 10⁻¹⁵', '≈ 2,5 × 10⁻⁶', '≈ 2,5 × 10⁻¹⁰', '≈ 2,5 × 10⁻²¹'],
+   c:0,
+   e:'9,81 × 22,5 / 9,0×10¹⁶ ≈ 2,45 × 10⁻¹⁵. Una variazione di due parti su un milione di miliardi, misurabile solo grazie alla strettissima riga gamma fornita dall\'effetto Mössbauer. Il fotone che sale perde energia e si arrossa.' },
+ { d:'Il perielio di Mercurio avanza di 43″ per secolo per effetti relativistici. Dopo quanti secoli l\'anticipo raggiunge 1 primo d\'arco (60″)?',
+   o:['≈ 1,4 secoli', '≈ 0,7 secoli', '≈ 43 secoli', '≈ 60 secoli'],
+   c:0,
+   e:'60/43 ≈ 1,4 secoli. Il valore 0,7 si ottiene invertendo il rapporto. Questi 43″ per secolo erano il residuo che la meccanica newtoniana non riusciva a spiegare nemmeno introducendo un pianeta sconosciuto: furono la prima conferma della relatività generale, calcolata da Einstein nel novembre 1915.' }
 ]};
 
 QUIZ.finale = { titolo: 'Quiz finale di riepilogo', teoria: [
