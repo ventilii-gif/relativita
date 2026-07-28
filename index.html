@@ -298,6 +298,29 @@ button.btn:disabled{opacity:.45;cursor:not-allowed}
 .result .bar{height:9px;border-radius:99px;background:var(--line);overflow:hidden;margin:.9rem auto;max-width:420px}
 .result .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--plum));width:0;transition:width .9s cubic-bezier(.2,.9,.3,1)}
 
+/* ---------- Note a piè di pagina ---------- */
+.footnotes{
+  margin:2rem 0 0; padding:1.1rem clamp(.9rem,2.4vw,1.35rem) 1.2rem;
+  border-top:2px solid var(--acc-line); background:var(--surface);
+  border-radius:0 0 var(--radius) var(--radius); box-shadow:var(--shadow);
+  font-size:.94rem; color:var(--text-2);
+  transition:background-color .45s ease,border-color .45s ease
+}
+.footnotes h4{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 .4rem}
+.footnotes p{margin:.6rem 0}
+.footnotes strong{color:var(--text)}
+.footnotes .formula{font-size:.96em}
+sup.fn{font-size:.7em;line-height:0}
+sup.fn a{
+  text-decoration:none;font-weight:700;color:var(--acc);
+  padding:.05em .3em;border-radius:4px;background:var(--acc-soft)
+}
+sup.fn a:hover{background:var(--acc);color:#fff}
+html[data-theme="dark"] sup.fn a:hover{color:#14121f}
+a.fnback{text-decoration:none;font-weight:700;color:var(--acc);margin-right:.15rem}
+a.fnback:hover{text-decoration:underline}
+:target{scroll-margin-top:1.5rem}
+
 /* ---------- Navigazione a piè di sezione ---------- */
 .secnav{display:flex;gap:.6rem;justify-content:space-between;margin:2.2rem 0 .5rem;padding-top:1.1rem;border-top:1px solid var(--line);flex-wrap:wrap}
 .secnav button{font:inherit;font-size:.88rem;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.55rem .9rem;color:var(--text);transition:border-color .2s,color .2s}
@@ -794,7 +817,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
 
     <div class="card">
       <h2>2.4 La relazione energia-impulso</h2>
-      <p>Eliminando \(v\) tra \(E = \gamma mc^2\) e \(p = \gamma mv\) si ottiene la relazione fondamentale della dinamica relativistica:</p>
+      <p>Eliminando \(v\) tra \(E = \gamma mc^2\) e \(p = \gamma mv\) si ottiene la relazione fondamentale della dinamica relativistica<sup class="fn" id="rif-ep"><a href="#nota-ep">1</a></sup>:</p>
       <div class="formula key">\[ E^{2} = (p c)^{2} + (m c^{2})^{2} \]</div>
       <p>È una specie di teorema di Pitagora dell'energia, e conviene tenerla a mente come un triangolo rettangolo: i cateti sono \(pc\) e \(mc^2\), l'ipotenusa è \(E\).</p>
       <figure class="diagram">
@@ -829,6 +852,26 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
         </table>
       </div>
       <p>Con queste unità, un protone accelerato a 6,5 TeV ha \(\gamma = E/(mc^2) = 6500/0{,}938 \approx 6900\).</p>
+    </div>
+
+    <div class="footnotes">
+      <h4>Nota</h4>
+      <div id="nota-ep">
+        <p><a class="fnback" href="#rif-ep">1.</a> <strong>Come si ricava \(E^{2} = (pc)^{2} + (mc^{2})^{2}\).</strong> Si parte dalle due definizioni relativistiche, che contengono entrambe la velocità attraverso \(\gamma\):</p>
+        <div class="formula">\[ E = \gamma m c^{2}, \qquad p = \gamma m v, \qquad \gamma = \frac{1}{\sqrt{1-\beta^{2}}}, \qquad \beta = \frac{v}{c} \]</div>
+        <p><strong>Passo 1.</strong> Si elevano al quadrato entrambe le espressioni, moltiplicando la seconda per \(c^{2}\) in modo che le due quantità abbiano le stesse unità (un'energia al quadrato):</p>
+        <div class="formula">\[ E^{2} = \gamma^{2} m^{2} c^{4}, \qquad (pc)^{2} = \gamma^{2} m^{2} v^{2} c^{2} \]</div>
+        <p><strong>Passo 2.</strong> Si sottrae la seconda dalla prima e si raccoglie \(\gamma^{2} m^{2} c^{4}\), notando che \(v^{2}c^{2} = \beta^{2}c^{4}\):</p>
+        <div class="formula">\[ E^{2} - (pc)^{2} = \gamma^{2} m^{2} c^{4} - \gamma^{2} m^{2} \beta^{2} c^{4} = \gamma^{2} m^{2} c^{4}\left(1 - \beta^{2}\right) \]</div>
+        <p><strong>Passo 3.</strong> Qui sta tutto il trucco: per definizione di \(\gamma\) vale \(\gamma^{2}\left(1-\beta^{2}\right) = 1\), perché \(\gamma^{2} = 1/(1-\beta^{2})\). Il fattore che contiene la velocità si semplifica e sparisce:</p>
+        <div class="formula">\[ E^{2} - (pc)^{2} = m^{2} c^{4} = (mc^{2})^{2} \]</div>
+        <p><strong>Passo 4.</strong> Portando \((pc)^{2}\) a destra si ottiene la relazione cercata:</p>
+        <div class="formula key">\[ E^{2} = (pc)^{2} + (mc^{2})^{2} \]</div>
+        <p>Due osservazioni sul risultato. La prima: <strong>la velocità è scomparsa</strong>, e non per caso — è proprio ciò che si voleva ottenere eliminando \(v\). Restano solo grandezze dinamiche (\(E\), \(p\)) e la massa, e la relazione vale anche per le particelle prive di massa, alle quali \(E = \gamma mc^{2}\) non si potrebbe applicare (\(\gamma\) sarebbe infinito e \(m\) nullo).</p>
+        <p>La seconda: dividendo membro a membro \(p = \gamma m v\) per \(E = \gamma m c^{2}\) si ottiene una formula molto comoda negli esercizi, che lega la velocità alle sole grandezze dinamiche:</p>
+        <div class="formula">\[ \frac{pc}{E} = \frac{v}{c} = \beta \]</div>
+        <p>Per un fotone \(pc = E\), da cui \(\beta = 1\): la relazione conferma che una particella di massa nulla non può che viaggiare a \(c\).</p>
+      </div>
     </div>
 
     <div class="secnav"><button data-goto="spaziotempo">← Spazio-tempo</button><button data-goto="invarianti">Invarianti relativistici →</button></div>
