@@ -292,6 +292,15 @@ button.btn:disabled{opacity:.45;cursor:not-allowed}
 .expl.ok{background:var(--ok-bg);border-color:var(--ok-line)} .expl.ok .lab{color:var(--ok)}
 .expl.no{background:var(--no-bg);border-color:var(--no-line)} .expl.no .lab{color:var(--no)}
 
+.qstep{display:flex;gap:.6rem;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:1rem}
+.qstep .qstep-mid{font-size:.84rem;color:var(--muted);text-align:center;flex:1;min-width:120px}
+.qstep .btn{flex:none}
+@media (max-width:520px){
+  .qstep{gap:.45rem}
+  .qstep .btn{flex:1;text-align:center}
+  .qstep .qstep-mid{order:3;flex-basis:100%}
+}
+
 .result{background:var(--surface);border:1px solid var(--acc-line);border-radius:var(--radius);padding:1.2rem;margin:1rem 0;box-shadow:var(--shadow);text-align:center;animation:fade .4s ease}
 .result .big{font-size:2.6rem;font-weight:700;color:var(--acc);line-height:1.1;font-family:ui-monospace,Menlo,monospace}
 .result .sub{color:var(--text-2);margin-top:.3rem}
@@ -398,7 +407,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
 
   <div class="card">
     <h2>Come è organizzato il percorso</h2>
-    <p>Cinque sezioni, ciascuna con la stessa struttura: <strong>Teoria</strong> (spiegazioni e formule), <strong>Simulazioni</strong> (grafica interattiva da manipolare con i cursori), <strong>Esercizi guidati</strong> (con suggerimenti progressivi) e <strong>Quiz</strong> (10 domande di teoria e 5 problemi numerici, con correzione immediata). Alla fine c'è un quiz conclusivo di riepilogo, con punteggio rivelato solo alla consegna.</p>
+    <p>Cinque sezioni, ciascuna con la stessa struttura: <strong>Teoria</strong> (spiegazioni e formule), <strong>Simulazioni</strong> (grafica interattiva da manipolare con i cursori), <strong>Esercizi guidati</strong> (con suggerimenti progressivi) e <strong>Quiz</strong> (10 domande di teoria e 5 problemi numerici, presentate una alla volta con correzione immediata). Alla fine c'è un quiz conclusivo di riepilogo, con punteggio rivelato solo alla consegna.</p>
     <div class="home-grid" id="homeCards"></div>
     <div class="note teal">
       <b class="tag">Suggerimento di metodo</b>
@@ -738,7 +747,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
 
   <!-- ---------- QUIZ ---------- -->
   <div class="pane" data-pane="quiz">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla sezione 1. Correzione immediata: dopo ogni risposta compare la spiegazione, anche quando sbagli — soprattutto quando sbagli.</p>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla sezione 1, una alla volta. Correzione immediata: dopo ogni risposta compare la spiegazione, anche quando sbagli — soprattutto quando sbagli. Puoi tornare indietro in qualsiasi momento.</p>
     <div data-quiz="spaziotempo"></div>
     <div class="secnav"><button data-goto="intro">← Introduzione</button><button data-goto="dinamica">Dinamica relativistica →</button></div>
   </div>
@@ -933,7 +942,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
   </div>
 
   <div class="pane" data-pane="quiz">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla dinamica relativistica, con correzione immediata.</p>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla dinamica relativistica, una alla volta, con correzione immediata e la possibilità di tornare indietro.</p>
     <div data-quiz="dinamica"></div>
     <div class="secnav"><button data-goto="spaziotempo">← Spazio-tempo</button><button data-goto="invarianti">Invarianti relativistici →</button></div>
   </div>
@@ -1120,7 +1129,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
   </div>
 
   <div class="pane" data-pane="quiz">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sugli invarianti, con correzione immediata.</p>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sugli invarianti, una alla volta, con correzione immediata e la possibilità di tornare indietro.</p>
     <div data-quiz="invarianti"></div>
     <div class="secnav"><button data-goto="dinamica">← Dinamica relativistica</button><button data-goto="minkowski">Spazio di Minkowski →</button></div>
   </div>
@@ -1307,7 +1316,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
   </div>
 
   <div class="pane" data-pane="quiz">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sullo spazio di Minkowski, con correzione immediata.</p>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sullo spazio di Minkowski, una alla volta, con correzione immediata e la possibilità di tornare indietro.</p>
     <div data-quiz="minkowski"></div>
     <div class="secnav"><button data-goto="invarianti">← Invarianti relativistici</button><button data-goto="generale">Relatività generale →</button></div>
   </div>
@@ -1560,7 +1569,7 @@ footer.site{border-top:1px solid var(--line);padding:1.4rem 0 2.4rem;color:var(-
   </div>
 
   <div class="pane" data-pane="quiz">
-    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla relatività generale, con correzione immediata.</p>
+    <p class="lead" style="margin-top:1rem;color:var(--text-2)">10 domande di teoria e 5 problemi numerici sulla relatività generale, una alla volta, con correzione immediata e la possibilità di tornare indietro.</p>
     <div data-quiz="generale"></div>
     <div class="secnav"><button data-goto="minkowski">← Spazio di Minkowski</button><button data-goto="finale">Quiz finale →</button></div>
   </div>
@@ -3737,19 +3746,43 @@ function shuffle(a) {
   for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; }
   return r;
 }
+/* frasi di riscontro: variate, mai svalutanti */
+const OK_LINES = [
+  'Esatto: il ragionamento regge.',
+  'Corretto. Hai individuato il passaggio che conta.',
+  'Giusto, e non era una domanda banale.',
+  'Sì, proprio così.',
+  'Risposta corretta: qui l\'intuito poteva ingannare, e non ti ha ingannato.'
+];
+const NO_LINES = [
+  'Non è la risposta giusta, ma è l\'errore che fanno quasi tutti su questo punto.',
+  'Risposta errata — e qui capita spesso, perché l\'intuito tira dall\'altra parte.',
+  'Non ci siamo, però il punto è sottile: leggi la spiegazione con calma.',
+  'Sbagliata, e va benissimo così: è esattamente il tipo di scivolone che serve a fissare il concetto.',
+  'Non è quella corretta. Nessun problema: su questa domanda si inciampa volentieri.'
+];
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
 function buildQuiz(box, data, mode) {
   const items = data.teoria.map(q => ({ q: q, tipo: 'Teoria' })).concat(data.problemi.map(q => ({ q: q, tipo: 'Problema' })));
   const N = items.length;
-  let answered = 0, correct = 0, done = false;
-  const state = [];
+  const state = items.map(it => ({ order: shuffle(it.q.o.map((t, k) => k)), sel: -1, locked: false }));
+  let answered = 0, correct = 0, cur = 0, done = false;
 
+  /* ---------- struttura comune ---------- */
   box.innerHTML =
     '<div class="quizhead">' +
     '<span class="score" data-r="score"></span>' +
     '<span class="progress"><i></i></span>' +
     '<button class="btn" data-r="restart">Ricomincia</button>' +
     '</div><div data-r="list"></div>' +
-    (mode === 'finale' ? '<div class="btnrow" style="justify-content:center"><button class="btn primary" data-r="submit">Consegna e calcola il punteggio</button></div>' : '') +
+    (mode === 'finale'
+      ? '<div class="btnrow" style="justify-content:center"><button class="btn primary" data-r="submit">Consegna e calcola il punteggio</button></div>'
+      : '<div class="qstep" data-r="nav">' +
+        '<button class="btn" data-r="prev">← Domanda precedente</button>' +
+        '<span class="qstep-mid" data-r="mid"></span>' +
+        '<button class="btn primary" data-r="next">Domanda successiva →</button>' +
+        '</div>') +
     '<div data-r="result"></div>';
 
   const list = box.querySelector('[data-r=list]');
@@ -3761,91 +3794,150 @@ function buildQuiz(box, data, mode) {
     bar.style.width = (answered / N * 100) + '%';
     scoreEl.textContent = mode === 'finale'
       ? 'Risposte date: ' + answered + ' / ' + N
-      : 'Corrette: ' + correct + ' su ' + answered + ' risposte (' + N + ' domande)';
+      : 'Risposte corrette: ' + correct + ' su ' + answered + (answered ? '' : ' — si comincia');
   }
 
-  items.forEach((it, i) => {
-    const q = it.q;
-    const order = shuffle(q.o.map((t, k) => k));      /* posizione casuale della risposta esatta */
+  /* ---------- costruzione di una domanda ---------- */
+  function makeCard(i) {
+    const it = items[i], q = it.q, st = state[i];
     const el = document.createElement('div');
     el.className = 'q';
-    el.innerHTML = '<div class="qn">Domanda ' + (i + 1) + ' / ' + N + ' · <span class="tp">' + it.tipo + '</span></div>' +
+    el.innerHTML = '<div class="qn">Domanda ' + (i + 1) + (mode === 'finale' ? ' / ' : ' di ') + N + ' · <span class="tp">' + it.tipo + '</span></div>' +
       '<div class="qt"></div><div class="opts"></div><div class="ex-slot"></div>';
     el.querySelector('.qt').textContent = q.d;
     const opts = el.querySelector('.opts');
-    const st = { order: order, sel: -1, locked: false, el: el };
-    state.push(st);
-    order.forEach((orig, pos) => {
+    st.order.forEach((orig, pos) => {
       const b = document.createElement('button');
       b.className = 'opt';
       b.innerHTML = '<span class="mk">' + 'ABCD'[pos] + '</span><span></span>';
       b.querySelector('span:last-child').textContent = q.o[orig];
       b.addEventListener('click', () => {
-        if (st.locked || done) return;
+        if (done) return;
         if (mode === 'finale') {
-          if (st.sel < 0) { answered++; }
+          if (st.sel < 0) answered++;
           st.sel = pos;
           Array.from(opts.children).forEach((x, k) => x.classList.toggle('sel', k === pos));
           updHead();
-        } else {
-          st.locked = true; st.sel = pos; answered++;
-          const ok = orig === q.c;
-          if (ok) correct++;
-          Array.from(opts.children).forEach((x, k) => {
-            x.disabled = true;
-            if (order[k] === q.c) x.classList.add('right');
-            else if (k === pos) x.classList.add('wrong');
-          });
-          const ex = document.createElement('div');
-          ex.className = 'expl ' + (ok ? 'ok' : 'no');
-          ex.innerHTML = '<span class="lab">' + (ok ? '✓ Risposta corretta' : '✗ Risposta errata') + '</span>' +
-            (ok ? '' : '<b>La risposta giusta era: ' + q.o[q.c] + '</b><br>') + q.e;
-          el.querySelector('.ex-slot').appendChild(ex);
-          updHead();
+          return;
         }
+        if (st.locked) return;
+        st.locked = true; st.sel = pos; answered++;
+        if (orig === q.c) correct++;
+        st.msg = orig === q.c ? pick(OK_LINES) : pick(NO_LINES);
+        reveal(el, i);
+        updHead(); updNav();
       });
       opts.appendChild(b);
     });
-    list.appendChild(el);
-  });
-
-  if (mode === 'finale') {
-    box.querySelector('[data-r=submit]').addEventListener('click', () => {
-      if (done) return;
-      done = true; correct = 0;
-      state.forEach((st, i) => {
-        const q = items[i].q;
-        const opts = st.el.querySelectorAll('.opt');
-        const ok = st.sel >= 0 && st.order[st.sel] === q.c;
-        if (ok) correct++;
-        opts.forEach((x, k) => {
-          x.disabled = true; x.classList.remove('sel');
-          if (st.order[k] === q.c) x.classList.add('right');
-          else if (k === st.sel) x.classList.add('wrong');
-        });
-        const ex = document.createElement('div');
-        ex.className = 'expl ' + (ok ? 'ok' : 'no');
-        ex.innerHTML = '<span class="lab">' + (ok ? '✓ Corretta' : (st.sel < 0 ? '— Senza risposta' : '✗ Errata')) + '</span>' +
-          (ok ? '' : '<b>Risposta corretta: ' + q.o[q.c] + '</b><br>') + q.e;
-        st.el.querySelector('.ex-slot').appendChild(ex);
-      });
-      const pct = Math.round(correct / N * 100);
-      let msg;
-      if (pct >= 85) msg = 'Padronanza solida: sai muoverti fra concetti e calcoli. Le poche imprecisioni rimaste si sistemano rileggendo le spiegazioni qui sotto.';
-      else if (pct >= 65) msg = 'Buona base. Rileggi le spiegazioni delle domande sbagliate: quasi sempre l\'errore è concentrato in due o tre punti ricorrenti, non sparso ovunque.';
-      else if (pct >= 45) msg = 'Il quadro c\'è, ma va consolidato. Torna sulle sezioni corrispondenti alle domande sbagliate e rifai gli esercizi guidati prima di riprovare.';
-      else msg = 'È presto per il riepilogo, ed è del tutto normale: questo argomento richiede più passaggi degli altri. Riprendi le sezioni una alla volta, usando le simulazioni prima della teoria.';
-      resBox.innerHTML = '<div class="result"><div class="big">' + correct + ' / ' + N + '</div>' +
-        '<div class="sub">' + pct + '% di risposte corrette</div>' +
-        '<div class="bar"><i></i></div><div class="sub">' + msg + '</div></div>';
-      setTimeout(() => { const i2 = resBox.querySelector('.bar i'); if (i2) i2.style.width = pct + '%'; }, 60);
-      box.querySelector('[data-r=submit]').disabled = true;
-      resBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
+    if (st.locked) reveal(el, i);
+    else if (mode === 'finale' && st.sel >= 0) opts.children[st.sel].classList.add('sel');
+    return el;
   }
-  box.querySelector('[data-r=restart]').addEventListener('click', () => { buildQuiz(box, data, mode); });
+
+  /* ---------- correzione di una domanda ---------- */
+  function reveal(el, i) {
+    const q = items[i].q, st = state[i];
+    const opts = el.querySelectorAll('.opt');
+    const ok = st.sel >= 0 && st.order[st.sel] === q.c;
+    opts.forEach((x, k) => {
+      x.disabled = true; x.classList.remove('sel');
+      if (st.order[k] === q.c) x.classList.add('right');
+      else if (k === st.sel) x.classList.add('wrong');
+    });
+    const slot = el.querySelector('.ex-slot');
+    slot.innerHTML = '';
+    const ex = document.createElement('div');
+    ex.className = 'expl ' + (ok ? 'ok' : 'no');
+    ex.innerHTML = '<span class="lab">' + (ok ? '✓ Corretto' : (st.sel < 0 ? '— Senza risposta' : '✗ Rivediamo insieme')) + '</span>' +
+      (st.msg ? '<b>' + st.msg + '</b><br>' : '') +
+      (ok ? '' : '<b>La risposta giusta era: ' + q.o[q.c] + '</b><br>') + q.e;
+    slot.appendChild(ex);
+  }
+
+  /* ================= modalità a una domanda per volta ================= */
+  if (mode !== 'finale') {
+    const prev = box.querySelector('[data-r=prev]');
+    const next = box.querySelector('[data-r=next]');
+    const mid = box.querySelector('[data-r=mid]');
+    const nav = box.querySelector('[data-r=nav]');
+
+    function show(i) {
+      cur = clamp(i, 0, N - 1);
+      list.innerHTML = '';
+      list.appendChild(makeCard(cur));
+      updNav(); updHead();
+    }
+    function updNav() {
+      prev.disabled = cur === 0;
+      const last = cur === N - 1;
+      next.textContent = last ? 'Vedi il riepilogo →' : 'Domanda successiva →';
+      next.classList.toggle('primary', state[cur].locked || last);
+      mid.textContent = state[cur].locked
+        ? (cur + 1) + ' di ' + N
+        : 'scegli una risposta — puoi sempre tornare indietro';
+    }
+    prev.addEventListener('click', () => { if (cur > 0) show(cur - 1); scrollHere(); });
+    next.addEventListener('click', () => {
+      if (cur < N - 1) { show(cur + 1); scrollHere(); }
+      else finish();
+    });
+    function scrollHere() {
+      const r = box.getBoundingClientRect();
+      if (r.top < 0 || r.top > window.innerHeight * 0.5) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    function finish() {
+      const pct = Math.round(correct / N * 100);
+      const senza = N - answered;
+      let msg;
+      if (pct >= 85) msg = 'Padronanza solida su questa sezione: puoi passare alla successiva con tranquillità.';
+      else if (pct >= 65) msg = 'Buona base. Rileggi le spiegazioni delle domande sbagliate: di solito l\'errore si concentra in due o tre punti ricorrenti.';
+      else if (pct >= 45) msg = 'Il quadro c\'è, ma va consolidato. Torna sulla teoria della sezione e rifai gli esercizi guidati, poi riprova: è normale che serva un secondo passaggio.';
+      else msg = 'Questa sezione va ripresa con calma, e non è affatto un brutto segno: è l\'argomento che più mette alla prova l\'intuito. Riparti dalle simulazioni, poi dalla teoria.';
+      resBox.innerHTML = '<div class="result"><div class="big">' + correct + ' / ' + N + '</div>' +
+        '<div class="sub">' + pct + '% di risposte corrette' + (senza ? ' · ' + senza + ' domande senza risposta' : '') + '</div>' +
+        '<div class="bar"><i></i></div><div class="sub">' + msg + '</div>' +
+        '<div class="btnrow" style="justify-content:center"><button class="btn" data-r="review">Rivedi le domande</button>' +
+        '<button class="btn primary" data-r="again">Ricomincia il quiz</button></div></div>';
+      list.innerHTML = ''; nav.style.display = 'none';
+      setTimeout(() => { const b2 = resBox.querySelector('.bar i'); if (b2) b2.style.width = pct + '%'; }, 60);
+      resBox.querySelector('[data-r=review]').addEventListener('click', () => {
+        resBox.innerHTML = ''; nav.style.display = ''; show(0); scrollHere();
+      });
+      resBox.querySelector('[data-r=again]').addEventListener('click', () => buildQuiz(box, data, mode));
+      scrollHere();
+    }
+    box.querySelector('[data-r=restart]').addEventListener('click', () => buildQuiz(box, data, mode));
+    show(0);
+    return;
+  }
+
+  /* ================= modalità finale: elenco completo, punteggio alla consegna ================= */
+  items.forEach((it, i) => list.appendChild(makeCard(i)));
+  box.querySelector('[data-r=submit]').addEventListener('click', () => {
+    if (done) return;
+    done = true; correct = 0;
+    Array.from(list.children).forEach((el, i) => {
+      const st = state[i];
+      if (st.sel >= 0 && st.order[st.sel] === items[i].q.c) correct++;
+      reveal(el, i);
+    });
+    const pct = Math.round(correct / N * 100);
+    let msg;
+    if (pct >= 85) msg = 'Padronanza solida: sai muoverti fra concetti e calcoli. Le poche imprecisioni rimaste si sistemano rileggendo le spiegazioni qui sotto.';
+    else if (pct >= 65) msg = 'Buona base. Rileggi le spiegazioni delle domande sbagliate: quasi sempre l\'errore è concentrato in due o tre punti ricorrenti, non sparso ovunque.';
+    else if (pct >= 45) msg = 'Il quadro c\'è, ma va consolidato. Torna sulle sezioni corrispondenti alle domande sbagliate e rifai gli esercizi guidati prima di riprovare.';
+    else msg = 'È presto per il riepilogo, ed è del tutto normale: questo argomento richiede più passaggi degli altri. Riprendi le sezioni una alla volta, usando le simulazioni prima della teoria.';
+    resBox.innerHTML = '<div class="result"><div class="big">' + correct + ' / ' + N + '</div>' +
+      '<div class="sub">' + pct + '% di risposte corrette</div>' +
+      '<div class="bar"><i></i></div><div class="sub">' + msg + '</div></div>';
+    setTimeout(() => { const i2 = resBox.querySelector('.bar i'); if (i2) i2.style.width = pct + '%'; }, 60);
+    box.querySelector('[data-r=submit]').disabled = true;
+    resBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  box.querySelector('[data-r=restart]').addEventListener('click', () => buildQuiz(box, data, mode));
   updHead();
 }
+
 function buildQuizzes() {
   Object.keys(QUIZ).forEach(key => {
     const box = document.querySelector('[data-quiz="' + key + '"]');
